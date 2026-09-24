@@ -82,6 +82,10 @@ func TestHandlerRegistry(t *testing.T) {
 		fingerprintHandler, exists := registry.GetHandler(common.CheckFingerprint)
 		assert.True(t, exists)
 		assert.IsType(t, &CheckFingerprintHandler{}, fingerprintHandler)
+
+		processesHandler, exists := registry.GetHandler(common.GetProcesses)
+		assert.True(t, exists)
+		assert.IsType(t, &GetProcessesHandler{}, processesHandler)
 	})
 
 	t.Run("custom handler registration", func(t *testing.T) {

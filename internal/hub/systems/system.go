@@ -20,6 +20,7 @@ import (
 
 	"github.com/henrygd/beszel/internal/entities/container"
 	"github.com/henrygd/beszel/internal/entities/monitor"
+	"github.com/henrygd/beszel/internal/entities/processes"
 	"github.com/henrygd/beszel/internal/entities/smart"
 	"github.com/henrygd/beszel/internal/entities/system"
 	"github.com/henrygd/beszel/internal/entities/systemd"
@@ -771,6 +772,15 @@ func (sys *System) FetchSystemdInfoFromAgent(serviceName string) (systemd.Servic
 	defer cancel()
 	var result systemd.ServiceDetails
 	err := sys.request(ctx, common.GetSystemdInfo, common.SystemdInfoRequest{ServiceName: serviceName}, &result)
+	return result, err
+}
+
+// FetchProcessesFromAgent fetches a current, read-only process snapshot from the agent.
+func (sys *System) FetchProcessesFromAgent() (processes.Snapshot, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+	var result processes.Snapshot
+	err := sys.request(ctx, common.GetProcesses, nil, &result)
 	return result, err
 }
 

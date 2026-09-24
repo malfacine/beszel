@@ -512,6 +512,29 @@ export interface SystemdRecord extends RecordModel {
 	updated: number
 }
 
+export type ProcessStatus = "running" | "sleeping" | "stopped" | "idle" | "zombie" | "waiting" | "locked" | "unknown"
+
+export interface AgentProcess {
+	pid: number
+	name: string
+	user?: string
+	status: ProcessStatus
+	cpu: number
+	memory: number
+	started?: number
+}
+
+export interface ProcessRecord extends AgentProcess {
+	system: string
+	updated: number
+}
+
+export interface ProcessSnapshot {
+	processes: AgentProcess[]
+	total: number
+	updated: number
+}
+
 export interface SystemdServiceDetails {
 	AccessSELinuxContext: string
 	ActivationDetails: any[]

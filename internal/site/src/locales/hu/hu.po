@@ -611,6 +611,7 @@ msgid "Core"
 msgstr "Mag"
 
 #: src/components/containers-table/containers-table-columns.tsx
+#: src/components/processes-table/processes-table-columns.tsx
 #: src/components/systemd-table/systemd-table-columns.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "CPU"
@@ -977,6 +978,7 @@ msgstr "Ventilátorok"
 
 #: src/components/containers-table/containers-table.tsx
 #: src/components/network-monitors-table/network-monitors-table.tsx
+#: src/components/processes-table/processes-table.tsx
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/routes/system/chart-card.tsx
 #: src/components/routes/system/smart-table.tsx
@@ -1103,6 +1105,7 @@ msgid "I/O Utilization"
 msgstr "I/O kihasználtság"
 
 #. Context: Battery state
+#: src/components/processes-table/processes-table-columns.tsx
 #: src/lib/i18n.ts
 msgid "Idle"
 msgstr "Tétlen"
@@ -1186,9 +1189,15 @@ msgstr "Terhelési átlag"
 msgid "Load state"
 msgstr "Betöltési állapot"
 
+#: src/components/processes-table/processes-table.tsx
+#: src/components/processes-table/processes-table.tsx
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Loading..."
 msgstr "Betöltés..."
+
+#: src/components/processes-table/processes-table-columns.tsx
+msgid "Locked"
+msgstr ""
 
 #: src/components/navbar.tsx
 #: src/components/navbar.tsx
@@ -1248,6 +1257,7 @@ msgid "Max 1h"
 msgstr "Max. 1 óra"
 
 #: src/components/containers-table/containers-table-columns.tsx
+#: src/components/processes-table/processes-table-columns.tsx
 #: src/components/routes/system/info-bar.tsx
 #: src/components/systemd-table/systemd-table-columns.tsx
 #: src/components/systemd-table/systemd-table.tsx
@@ -1300,6 +1310,7 @@ msgstr "Csatolási pont"
 #: src/components/add-system.tsx
 #: src/components/alerts-history-columns.tsx
 #: src/components/containers-table/containers-table-columns.tsx
+#: src/components/processes-table/processes-table-columns.tsx
 #: src/components/systemd-table/systemd-table-columns.tsx
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Name"
@@ -1368,6 +1379,7 @@ msgstr "Nincs találat."
 #: src/components/containers-table/containers-table.tsx
 #: src/components/containers-table/containers-table.tsx
 #: src/components/network-monitors-table/network-monitors-table.tsx
+#: src/components/processes-table/processes-table.tsx
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/routes/system/smart-table.tsx
 #: src/components/systemd-table/systemd-table.tsx
@@ -1454,6 +1466,7 @@ msgstr "Felülírja a meglévő riasztásokat"
 msgid "Packet loss (%)"
 msgstr "Csomagvesztés (%)"
 
+#: src/components/command-palette.tsx
 #: src/components/command-palette.tsx
 #: src/components/command-palette.tsx
 #: src/components/command-palette.tsx
@@ -1604,6 +1617,14 @@ msgstr "Preferált nyelv"
 msgid "Process started"
 msgstr "Folyamat elindítva"
 
+#: src/components/command-palette.tsx
+#: src/components/navbar.tsx
+#: src/components/navbar.tsx
+#: src/components/processes-table/processes-table.tsx
+#: src/components/routes/processes.tsx
+msgid "Processes"
+msgstr ""
+
 #: src/components/network-monitors-table/monitor-dialog.tsx
 #: src/components/network-monitors-table/network-monitors-columns.tsx
 #: src/components/network-monitors-table/network-monitors-columns.tsx
@@ -1728,6 +1749,14 @@ msgstr "Tokenváltás"
 #: src/components/routes/settings/alerts-history-data-table.tsx
 msgid "Rows per page"
 msgstr "Sorok száma oldalanként"
+
+#: src/components/processes-table/processes-table-columns.tsx
+msgid "Running"
+msgstr ""
+
+#: src/components/processes-table/processes-table.tsx
+msgid "Running: {running}"
+msgstr ""
 
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Runtime Metrics"
@@ -1875,9 +1904,17 @@ msgstr "Beállítások"
 msgid "Settings saved"
 msgstr "Beállítások elmentve"
 
+#: src/components/processes-table/processes-table.tsx
+msgid "Showing {shown} of {total}"
+msgstr ""
+
 #: src/components/login/auth-form.tsx
 msgid "Sign in"
 msgstr "Bejelentkezés"
+
+#: src/components/processes-table/processes-table-columns.tsx
+msgid "Sleeping"
+msgstr ""
 
 #: src/components/command-palette.tsx
 msgid "SMTP settings"
@@ -1893,8 +1930,13 @@ msgstr "Rendezés"
 msgid "Start Time"
 msgstr "Kezdési idő"
 
+#: src/components/processes-table/processes-table-columns.tsx
+msgid "Started"
+msgstr ""
+
 #. Context: alert state (active or resolved)
 #: src/components/alerts-history-columns.tsx
+#: src/components/processes-table/processes-table-columns.tsx
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/system/storage-pools-table.tsx
 #: src/components/systemd-table/systemd-table-columns.tsx
@@ -1908,6 +1950,10 @@ msgstr "Állapot"
 #: src/lib/alerts.ts
 msgid "Status"
 msgstr "Állapot"
+
+#: src/components/processes-table/processes-table-columns.tsx
+msgid "Stopped"
+msgstr ""
 
 #: src/components/systemd-table/systemd-table-columns.tsx
 msgid "Sub State"
@@ -1931,6 +1977,7 @@ msgstr "Téma váltása"
 #: src/components/network-monitors-table/monitor-dialog.tsx
 #: src/components/network-monitors-table/network-monitors-columns.tsx
 #: src/components/network-monitors-table/network-monitors-columns.tsx
+#: src/components/processes-table/processes-table-columns.tsx
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/settings/quiet-hours.tsx
@@ -2096,6 +2143,10 @@ msgstr "Olvasással/írással töltött teljes idő (meghaladhatja a 100%-ot)"
 msgid "Total: {0}"
 msgstr "Összesen: {0}"
 
+#: src/components/processes-table/processes-table.tsx
+msgid "Total: {total}"
+msgstr ""
+
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Triggered by"
 msgstr "Kiváltva"
@@ -2175,6 +2226,10 @@ msgstr "Riaszt, ha a lemezhasználat túllép egy küszöbértéket"
 msgid "Type"
 msgstr "Típus"
 
+#: src/components/processes-table/processes-table.tsx
+msgid "Unavailable systems: {unavailable}"
+msgstr ""
+
 #: src/lib/alerts.ts
 msgid "Unhealthy"
 msgstr "Nem egészséges"
@@ -2194,6 +2249,7 @@ msgid "Universal token"
 msgstr "Univerzális token"
 
 #. Context: Battery state
+#: src/components/processes-table/processes-table-columns.tsx
 #: src/components/routes/system/storage-pools-table.tsx
 #: src/lib/i18n.ts
 msgid "Unknown"
@@ -2231,6 +2287,10 @@ msgstr "Frissítve"
 msgid "Updated every 10 minutes."
 msgstr "10 percenként frissítve."
 
+#: src/components/processes-table/processes-table.tsx
+msgid "Updated every 10 seconds."
+msgstr ""
+
 #: src/components/routes/system/network-sheet.tsx
 msgid "Upload"
 msgstr "Feltöltés"
@@ -2261,6 +2321,10 @@ msgstr "A(z) {displayName} tárolókészlet kihasználtsága"
 #: src/components/routes/system/storage-pools-table.tsx
 msgid "Used"
 msgstr "Felhasznált"
+
+#: src/components/processes-table/processes-table-columns.tsx
+msgid "User"
+msgstr ""
 
 #: src/components/command-palette.tsx
 #: src/components/navbar.tsx
@@ -2295,6 +2359,10 @@ msgstr "Legfrissebb 200 riasztásod áttekintése."
 #: src/components/systems-table/systems-table.tsx
 msgid "Visible Fields"
 msgstr "Látható mezők"
+
+#: src/components/processes-table/processes-table-columns.tsx
+msgid "Waiting"
+msgstr ""
 
 #: src/components/routes/system/chart-card.tsx
 msgid "Waiting for enough records to display"
@@ -2366,3 +2434,7 @@ msgstr "Igen"
 #: src/components/routes/settings/layout.tsx
 msgid "Your user settings have been updated."
 msgstr "A felhasználói beállítások frissítésre kerültek."
+
+#: src/components/processes-table/processes-table-columns.tsx
+msgid "Zombie"
+msgstr ""

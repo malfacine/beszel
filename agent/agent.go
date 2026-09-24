@@ -50,6 +50,7 @@ type Agent struct {
 	systemdManager            *systemdManager                                       // Manages systemd services
 	monitorManager            *MonitorManager                                       // Manages network monitors
 	storagePoolManager        *StoragePoolManager                                   // Manages storage pool and dataset data
+	processManager            *processManager                                       // Collects process snapshots on demand
 }
 
 // NewAgent creates a new agent with the given data directory for persisting data.
@@ -127,6 +128,7 @@ func NewAgent(dataDir ...string) (agent *Agent, err error) {
 	agent.monitorManager = newMonitorManager()
 
 	agent.storagePoolManager = newStoragePoolManager()
+	agent.processManager = newProcessManager()
 
 	// Retain ZFS_INTERVAL for the shared storage pool detail refresh interval.
 	if zfsIntervalEnv, exists := utils.GetEnv("ZFS_INTERVAL"); exists {

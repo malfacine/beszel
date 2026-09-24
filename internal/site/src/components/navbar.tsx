@@ -4,6 +4,7 @@ import {
 	ContainerIcon,
 	DatabaseBackupIcon,
 	HardDriveIcon,
+	ListTreeIcon,
 	LogOutIcon,
 	LogsIcon,
 	MenuIcon,
@@ -110,6 +111,13 @@ export default function Navbar() {
 								<TerminalSquareIcon className="h-4 w-4 me-2.5" strokeWidth={1.5} />
 								<Trans>Services</Trans>
 							</DropdownMenuItem>
+							<DropdownMenuItem
+								onClick={() => navigate(getPagePath($router, "processes"))}
+								className="flex items-center"
+							>
+								<ListTreeIcon className="h-4 w-4 me-2.5" strokeWidth={1.5} />
+								<Trans>Processes</Trans>
+							</DropdownMenuItem>
 							<DropdownMenuItem onClick={() => navigate(getPagePath($router, "smart"))} className="flex items-center">
 								<HardDriveIcon className="h-4 w-4 me-2.5" strokeWidth={1.5} />
 								<span>S.M.A.R.T.</span>
@@ -193,6 +201,21 @@ export default function Navbar() {
 					</TooltipTrigger>
 					<TooltipContent>
 						<Trans>Services</Trans>
+					</TooltipContent>
+				</Tooltip>
+				<Tooltip>
+					<TooltipTrigger asChild>
+						<Link
+							href={getPagePath($router, "processes")}
+							className={cn(buttonVariants({ variant: "ghost", size: "icon" }))}
+							aria-label="Processes"
+							onMouseEnter={() => import("@/components/routes/processes")}
+						>
+							<ListTreeIcon className="h-[1.2rem] w-[1.2rem]" strokeWidth={1.5} />
+						</Link>
+					</TooltipTrigger>
+					<TooltipContent>
+						<Trans>Processes</Trans>
 					</TooltipContent>
 				</Tooltip>
 				<Tooltip>

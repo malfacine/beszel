@@ -631,6 +631,48 @@ func TestApiRoutesAuthentication(t *testing.T) {
 				})
 			},
 		},
+		// /processes route
+		{
+			Name:            "GET /processes - no auth should fail",
+			Method:          http.MethodGet,
+			URL:             fmt.Sprintf("/api/beszel/processes?system=%s", system.Id),
+			ExpectedStatus:  401,
+			ExpectedContent: []string{"requires valid"},
+			TestAppFactory:  testAppFactory,
+		},
+		{
+			Name:   "GET /processes - missing system should fail",
+			Method: http.MethodGet,
+			URL:    "/api/beszel/processes",
+			Headers: map[string]string{
+				"Authorization": userToken,
+			},
+			ExpectedStatus:  400,
+			ExpectedContent: []string{"Invalid", "parameter"},
+			TestAppFactory:  testAppFactory,
+		},
+		{
+			Name:   "GET /processes - non-user system should fail",
+			Method: http.MethodGet,
+			URL:    fmt.Sprintf("/api/beszel/processes?system=%s", system.Id),
+			Headers: map[string]string{
+				"Authorization": user2Token,
+			},
+			ExpectedStatus:  404,
+			ExpectedContent: []string{"The requested resource wasn't found."},
+			TestAppFactory:  testAppFactory,
+		},
+		{
+			Name:   "GET /processes - valid user should pass validation",
+			Method: http.MethodGet,
+			URL:    fmt.Sprintf("/api/beszel/processes?system=%s", system.Id),
+			Headers: map[string]string{
+				"Authorization": userToken,
+			},
+			ExpectedStatus:  500,
+			ExpectedContent: []string{"Something went wrong while processing your request."},
+			TestAppFactory:  testAppFactory,
+		},
 
 		// Auth Optional Routes - Should work without authentication
 		{

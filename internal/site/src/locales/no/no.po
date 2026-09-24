@@ -611,6 +611,7 @@ msgid "Core"
 msgstr "Kjerne"
 
 #: src/components/containers-table/containers-table-columns.tsx
+#: src/components/processes-table/processes-table-columns.tsx
 #: src/components/systemd-table/systemd-table-columns.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "CPU"
@@ -977,6 +978,7 @@ msgstr "Vifter"
 
 #: src/components/containers-table/containers-table.tsx
 #: src/components/network-monitors-table/network-monitors-table.tsx
+#: src/components/processes-table/processes-table.tsx
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/routes/system/chart-card.tsx
 #: src/components/routes/system/smart-table.tsx
@@ -1103,6 +1105,7 @@ msgid "I/O Utilization"
 msgstr "I/O-utnyttelse"
 
 #. Context: Battery state
+#: src/components/processes-table/processes-table-columns.tsx
 #: src/lib/i18n.ts
 msgid "Idle"
 msgstr "Inaktiv"
@@ -1186,9 +1189,15 @@ msgstr "Snittbelastning"
 msgid "Load state"
 msgstr "Lastetilstand"
 
+#: src/components/processes-table/processes-table.tsx
+#: src/components/processes-table/processes-table.tsx
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Loading..."
 msgstr "Laster..."
+
+#: src/components/processes-table/processes-table-columns.tsx
+msgid "Locked"
+msgstr ""
 
 #: src/components/navbar.tsx
 #: src/components/navbar.tsx
@@ -1248,6 +1257,7 @@ msgid "Max 1h"
 msgstr "Maks. 1 t"
 
 #: src/components/containers-table/containers-table-columns.tsx
+#: src/components/processes-table/processes-table-columns.tsx
 #: src/components/routes/system/info-bar.tsx
 #: src/components/systemd-table/systemd-table-columns.tsx
 #: src/components/systemd-table/systemd-table.tsx
@@ -1300,6 +1310,7 @@ msgstr "Monteringspunkt"
 #: src/components/add-system.tsx
 #: src/components/alerts-history-columns.tsx
 #: src/components/containers-table/containers-table-columns.tsx
+#: src/components/processes-table/processes-table-columns.tsx
 #: src/components/systemd-table/systemd-table-columns.tsx
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Name"
@@ -1368,6 +1379,7 @@ msgstr "Ingen resultater funnet."
 #: src/components/containers-table/containers-table.tsx
 #: src/components/containers-table/containers-table.tsx
 #: src/components/network-monitors-table/network-monitors-table.tsx
+#: src/components/processes-table/processes-table.tsx
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/routes/system/smart-table.tsx
 #: src/components/systemd-table/systemd-table.tsx
@@ -1454,6 +1466,7 @@ msgstr "Overskriv eksisterende alarmer"
 msgid "Packet loss (%)"
 msgstr "Pakketap (%)"
 
+#: src/components/command-palette.tsx
 #: src/components/command-palette.tsx
 #: src/components/command-palette.tsx
 #: src/components/command-palette.tsx
@@ -1604,6 +1617,14 @@ msgstr "Foretrukket Språk"
 msgid "Process started"
 msgstr "Prosess startet"
 
+#: src/components/command-palette.tsx
+#: src/components/navbar.tsx
+#: src/components/navbar.tsx
+#: src/components/processes-table/processes-table.tsx
+#: src/components/routes/processes.tsx
+msgid "Processes"
+msgstr ""
+
 #: src/components/network-monitors-table/monitor-dialog.tsx
 #: src/components/network-monitors-table/network-monitors-columns.tsx
 #: src/components/network-monitors-table/network-monitors-columns.tsx
@@ -1728,6 +1749,14 @@ msgstr "Forny token"
 #: src/components/routes/settings/alerts-history-data-table.tsx
 msgid "Rows per page"
 msgstr "Rader per side"
+
+#: src/components/processes-table/processes-table-columns.tsx
+msgid "Running"
+msgstr ""
+
+#: src/components/processes-table/processes-table.tsx
+msgid "Running: {running}"
+msgstr ""
 
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Runtime Metrics"
@@ -1875,9 +1904,17 @@ msgstr "Innstillinger"
 msgid "Settings saved"
 msgstr "Innstillinger lagret"
 
+#: src/components/processes-table/processes-table.tsx
+msgid "Showing {shown} of {total}"
+msgstr ""
+
 #: src/components/login/auth-form.tsx
 msgid "Sign in"
 msgstr "Logg inn"
+
+#: src/components/processes-table/processes-table-columns.tsx
+msgid "Sleeping"
+msgstr ""
 
 #: src/components/command-palette.tsx
 msgid "SMTP settings"
@@ -1893,8 +1930,13 @@ msgstr "Sorter Etter"
 msgid "Start Time"
 msgstr "Starttid"
 
+#: src/components/processes-table/processes-table-columns.tsx
+msgid "Started"
+msgstr ""
+
 #. Context: alert state (active or resolved)
 #: src/components/alerts-history-columns.tsx
+#: src/components/processes-table/processes-table-columns.tsx
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/system/storage-pools-table.tsx
 #: src/components/systemd-table/systemd-table-columns.tsx
@@ -1908,6 +1950,10 @@ msgstr "Tilstand"
 #: src/lib/alerts.ts
 msgid "Status"
 msgstr "Status"
+
+#: src/components/processes-table/processes-table-columns.tsx
+msgid "Stopped"
+msgstr ""
 
 #: src/components/systemd-table/systemd-table-columns.tsx
 msgid "Sub State"
@@ -1931,6 +1977,7 @@ msgstr "Bytt tema"
 #: src/components/network-monitors-table/monitor-dialog.tsx
 #: src/components/network-monitors-table/network-monitors-columns.tsx
 #: src/components/network-monitors-table/network-monitors-columns.tsx
+#: src/components/processes-table/processes-table-columns.tsx
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/settings/quiet-hours.tsx
@@ -2096,6 +2143,10 @@ msgstr "Total tid brukt på lesing/skriving (kan overstige 100 %)"
 msgid "Total: {0}"
 msgstr "Totalt: {0}"
 
+#: src/components/processes-table/processes-table.tsx
+msgid "Total: {total}"
+msgstr ""
+
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Triggered by"
 msgstr "Utløst av"
@@ -2175,6 +2226,10 @@ msgstr "Slår inn når forbruk av hvilken som helst disk overstiger en grensever
 msgid "Type"
 msgstr "Type"
 
+#: src/components/processes-table/processes-table.tsx
+msgid "Unavailable systems: {unavailable}"
+msgstr ""
+
 #: src/lib/alerts.ts
 msgid "Unhealthy"
 msgstr "Usunn"
@@ -2194,6 +2249,7 @@ msgid "Universal token"
 msgstr "Universal token"
 
 #. Context: Battery state
+#: src/components/processes-table/processes-table-columns.tsx
 #: src/components/routes/system/storage-pools-table.tsx
 #: src/lib/i18n.ts
 msgid "Unknown"
@@ -2231,6 +2287,10 @@ msgstr "Oppdatert"
 msgid "Updated every 10 minutes."
 msgstr "Oppdatert hvert 10. minutt."
 
+#: src/components/processes-table/processes-table.tsx
+msgid "Updated every 10 seconds."
+msgstr ""
+
 #: src/components/routes/system/network-sheet.tsx
 msgid "Upload"
 msgstr "Last opp"
@@ -2261,6 +2321,10 @@ msgstr "Bruk av lagringspool {displayName}"
 #: src/components/routes/system/storage-pools-table.tsx
 msgid "Used"
 msgstr "Brukt"
+
+#: src/components/processes-table/processes-table-columns.tsx
+msgid "User"
+msgstr ""
 
 #: src/components/command-palette.tsx
 #: src/components/navbar.tsx
@@ -2295,6 +2359,10 @@ msgstr "Vis de 200 siste varslene."
 #: src/components/systems-table/systems-table.tsx
 msgid "Visible Fields"
 msgstr "Synlige Felter"
+
+#: src/components/processes-table/processes-table-columns.tsx
+msgid "Waiting"
+msgstr ""
 
 #: src/components/routes/system/chart-card.tsx
 msgid "Waiting for enough records to display"
@@ -2366,3 +2434,7 @@ msgstr "Ja"
 #: src/components/routes/settings/layout.tsx
 msgid "Your user settings have been updated."
 msgstr "Dine brukerinnstillinger har blitt oppdatert."
+
+#: src/components/processes-table/processes-table-columns.tsx
+msgid "Zombie"
+msgstr ""

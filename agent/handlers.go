@@ -54,6 +54,7 @@ func NewHandlerRegistry() *HandlerRegistry {
 	registry.Register(common.GetSystemdInfo, &GetSystemdInfoHandler{})
 	registry.Register(common.SyncNetworkMonitors, &SyncNetworkMonitorsHandler{})
 	registry.Register(common.GetZfsData, &GetZfsDataHandler{})
+	registry.Register(common.GetProcesses, &GetProcessesHandler{})
 
 	return registry
 }
@@ -224,6 +225,23 @@ func (h *GetSystemdInfoHandler) Handle(hctx *HandlerContext) error {
 	}
 
 	return hctx.SendResponse(details, hctx.RequestID)
+}
+
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+
+// GetProcessesHandler handles read-only process snapshot requests.
+type GetProcessesHandler struct{}
+
+func (h *GetProcessesHandler) Handle(hctx *HandlerContext) error {
+	if hctx.Agent.processManager == nil {
+		return errors.ErrUnsupported
+	}
+	snapshot, err := hctx.Agent.processManager.getSnapshot()
+	if err != nil {
+		return err
+	}
+	return hctx.SendResponse(snapshot, hctx.RequestID)
 }
 
 ////////////////////////////////////////////////////////////////////////////

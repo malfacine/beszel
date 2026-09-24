@@ -26,6 +26,8 @@ const (
 	GetZfsData
 	// Sync network monitor configuration to agent
 	SyncNetworkMonitors
+	// Request a lightweight process snapshot from agent
+	GetProcesses
 	// Add new actions here...
 )
 

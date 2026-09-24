@@ -9,6 +9,7 @@ import {
 	DatabaseBackupIcon,
 	FingerprintIcon,
 	HardDriveIcon,
+	ListTreeIcon,
 	LogsIcon,
 	MailIcon,
 	NetworkIcon,
@@ -121,6 +122,20 @@ export default memo(function CommandPalette({ open, setOpen }: { open: boolean; 
 							<TerminalSquareIcon className="me-2 size-4" />
 							<span>
 								<Trans>Services</Trans>
+							</span>
+							<CommandShortcut>
+								<Trans>Page</Trans>
+							</CommandShortcut>
+						</CommandItem>
+						<CommandItem
+							onSelect={() => {
+								navigate(getPagePath($router, "processes"))
+								setOpen(false)
+							}}
+						>
+							<ListTreeIcon className="me-2 size-4" />
+							<span>
+								<Trans>Processes</Trans>
 							</span>
 							<CommandShortcut>
 								<Trans>Page</Trans>

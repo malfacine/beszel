@@ -611,6 +611,7 @@ msgid "Core"
 msgstr "Lõi"
 
 #: src/components/containers-table/containers-table-columns.tsx
+#: src/components/processes-table/processes-table-columns.tsx
 #: src/components/systemd-table/systemd-table-columns.tsx
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "CPU"
@@ -977,6 +978,7 @@ msgstr "Quạt"
 
 #: src/components/containers-table/containers-table.tsx
 #: src/components/network-monitors-table/network-monitors-table.tsx
+#: src/components/processes-table/processes-table.tsx
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/routes/system/chart-card.tsx
 #: src/components/routes/system/smart-table.tsx
@@ -1103,6 +1105,7 @@ msgid "I/O Utilization"
 msgstr "Sử dụng I/O"
 
 #. Context: Battery state
+#: src/components/processes-table/processes-table-columns.tsx
 #: src/lib/i18n.ts
 msgid "Idle"
 msgstr "Không hoạt động"
@@ -1186,9 +1189,15 @@ msgstr "Tải TB"
 msgid "Load state"
 msgstr "Trạng thái tải"
 
+#: src/components/processes-table/processes-table.tsx
+#: src/components/processes-table/processes-table.tsx
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Loading..."
 msgstr "Đang tải..."
+
+#: src/components/processes-table/processes-table-columns.tsx
+msgid "Locked"
+msgstr ""
 
 #: src/components/navbar.tsx
 #: src/components/navbar.tsx
@@ -1248,6 +1257,7 @@ msgid "Max 1h"
 msgstr "Tối đa 1 giờ"
 
 #: src/components/containers-table/containers-table-columns.tsx
+#: src/components/processes-table/processes-table-columns.tsx
 #: src/components/routes/system/info-bar.tsx
 #: src/components/systemd-table/systemd-table-columns.tsx
 #: src/components/systemd-table/systemd-table.tsx
@@ -1300,6 +1310,7 @@ msgstr "Điểm gắn kết"
 #: src/components/add-system.tsx
 #: src/components/alerts-history-columns.tsx
 #: src/components/containers-table/containers-table-columns.tsx
+#: src/components/processes-table/processes-table-columns.tsx
 #: src/components/systemd-table/systemd-table-columns.tsx
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Name"
@@ -1368,6 +1379,7 @@ msgstr "Không tìm thấy kết quả."
 #: src/components/containers-table/containers-table.tsx
 #: src/components/containers-table/containers-table.tsx
 #: src/components/network-monitors-table/network-monitors-table.tsx
+#: src/components/processes-table/processes-table.tsx
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/routes/system/smart-table.tsx
 #: src/components/systemd-table/systemd-table.tsx
@@ -1454,6 +1466,7 @@ msgstr "Ghi đè các cảnh báo hiện có"
 msgid "Packet loss (%)"
 msgstr "Mất gói (%)"
 
+#: src/components/command-palette.tsx
 #: src/components/command-palette.tsx
 #: src/components/command-palette.tsx
 #: src/components/command-palette.tsx
@@ -1604,6 +1617,14 @@ msgstr "Ngôn ngữ Ưa thích"
 msgid "Process started"
 msgstr "Tiến trình đã khởi động"
 
+#: src/components/command-palette.tsx
+#: src/components/navbar.tsx
+#: src/components/navbar.tsx
+#: src/components/processes-table/processes-table.tsx
+#: src/components/routes/processes.tsx
+msgid "Processes"
+msgstr ""
+
 #: src/components/network-monitors-table/monitor-dialog.tsx
 #: src/components/network-monitors-table/network-monitors-columns.tsx
 #: src/components/network-monitors-table/network-monitors-columns.tsx
@@ -1728,6 +1749,14 @@ msgstr "Xoay vòng token"
 #: src/components/routes/settings/alerts-history-data-table.tsx
 msgid "Rows per page"
 msgstr "Số hàng mỗi trang"
+
+#: src/components/processes-table/processes-table-columns.tsx
+msgid "Running"
+msgstr ""
+
+#: src/components/processes-table/processes-table.tsx
+msgid "Running: {running}"
+msgstr ""
 
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Runtime Metrics"
@@ -1875,9 +1904,17 @@ msgstr "Cài đặt"
 msgid "Settings saved"
 msgstr "Cài đặt đã được lưu"
 
+#: src/components/processes-table/processes-table.tsx
+msgid "Showing {shown} of {total}"
+msgstr ""
+
 #: src/components/login/auth-form.tsx
 msgid "Sign in"
 msgstr "Đăng nhập"
+
+#: src/components/processes-table/processes-table-columns.tsx
+msgid "Sleeping"
+msgstr ""
 
 #: src/components/command-palette.tsx
 msgid "SMTP settings"
@@ -1893,8 +1930,13 @@ msgstr "Sắp xếp theo"
 msgid "Start Time"
 msgstr "Thời gian bắt đầu"
 
+#: src/components/processes-table/processes-table-columns.tsx
+msgid "Started"
+msgstr ""
+
 #. Context: alert state (active or resolved)
 #: src/components/alerts-history-columns.tsx
+#: src/components/processes-table/processes-table-columns.tsx
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/system/storage-pools-table.tsx
 #: src/components/systemd-table/systemd-table-columns.tsx
@@ -1908,6 +1950,10 @@ msgstr "Trạng thái"
 #: src/lib/alerts.ts
 msgid "Status"
 msgstr "Trạng thái"
+
+#: src/components/processes-table/processes-table-columns.tsx
+msgid "Stopped"
+msgstr ""
 
 #: src/components/systemd-table/systemd-table-columns.tsx
 msgid "Sub State"
@@ -1931,6 +1977,7 @@ msgstr "Đổi giao diện"
 #: src/components/network-monitors-table/monitor-dialog.tsx
 #: src/components/network-monitors-table/network-monitors-columns.tsx
 #: src/components/network-monitors-table/network-monitors-columns.tsx
+#: src/components/processes-table/processes-table-columns.tsx
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/settings/quiet-hours.tsx
@@ -2096,6 +2143,10 @@ msgstr "Tổng thời gian đọc/ghi (có thể vượt quá 100%)"
 msgid "Total: {0}"
 msgstr "Tổng: {0}"
 
+#: src/components/processes-table/processes-table.tsx
+msgid "Total: {total}"
+msgstr ""
+
 #: src/components/systemd-table/systemd-table.tsx
 msgid "Triggered by"
 msgstr "Được kích hoạt bởi"
@@ -2175,6 +2226,10 @@ msgstr "Kích hoạt khi sử dụng bất kỳ đĩa nào vượt quá ngưỡn
 msgid "Type"
 msgstr "Loại"
 
+#: src/components/processes-table/processes-table.tsx
+msgid "Unavailable systems: {unavailable}"
+msgstr ""
+
 #: src/lib/alerts.ts
 msgid "Unhealthy"
 msgstr "Không khỏe mạnh"
@@ -2194,6 +2249,7 @@ msgid "Universal token"
 msgstr "Token chung"
 
 #. Context: Battery state
+#: src/components/processes-table/processes-table-columns.tsx
 #: src/components/routes/system/storage-pools-table.tsx
 #: src/lib/i18n.ts
 msgid "Unknown"
@@ -2231,6 +2287,10 @@ msgstr "Đã cập nhật"
 msgid "Updated every 10 minutes."
 msgstr "Cập nhật mỗi 10 phút."
 
+#: src/components/processes-table/processes-table.tsx
+msgid "Updated every 10 seconds."
+msgstr ""
+
 #: src/components/routes/system/network-sheet.tsx
 msgid "Upload"
 msgstr "Tải lên"
@@ -2261,6 +2321,10 @@ msgstr "Mức sử dụng của pool lưu trữ {displayName}"
 #: src/components/routes/system/storage-pools-table.tsx
 msgid "Used"
 msgstr "Đã sử dụng"
+
+#: src/components/processes-table/processes-table-columns.tsx
+msgid "User"
+msgstr ""
 
 #: src/components/command-palette.tsx
 #: src/components/navbar.tsx
@@ -2295,6 +2359,10 @@ msgstr "Xem 200 cảnh báo gần đây nhất của bạn."
 #: src/components/systems-table/systems-table.tsx
 msgid "Visible Fields"
 msgstr "Các cột hiển thị"
+
+#: src/components/processes-table/processes-table-columns.tsx
+msgid "Waiting"
+msgstr ""
 
 #: src/components/routes/system/chart-card.tsx
 msgid "Waiting for enough records to display"
@@ -2366,3 +2434,7 @@ msgstr "Có"
 #: src/components/routes/settings/layout.tsx
 msgid "Your user settings have been updated."
 msgstr "Cài đặt người dùng của bạn đã được cập nhật."
+
+#: src/components/processes-table/processes-table-columns.tsx
+msgid "Zombie"
+msgstr ""

@@ -181,6 +181,7 @@ func TestCommonActions(t *testing.T) {
 	assert.Equal(t, common.WebSocketAction(0), common.GetData, "GetData should be action 0")
 	assert.Equal(t, common.WebSocketAction(1), common.CheckFingerprint, "CheckFingerprint should be action 1")
 	assert.Equal(t, common.WebSocketAction(2), common.GetContainerLogs, "GetLogs should be action 2")
+	assert.Equal(t, common.WebSocketAction(8), common.GetProcesses, "GetProcesses should be appended without shifting existing actions")
 }
 
 func TestFingerprintHandler(t *testing.T) {
