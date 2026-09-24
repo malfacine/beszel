@@ -52,6 +52,10 @@ msgstr "{count, plural, one {{countString} ώρα} other {{countString} ώρες
 msgid "{count, plural, one {{countString} minute} few {{countString} minutes} many {{countString} minutes} other {{countString} minutes}}"
 msgstr "{count, plural, one {{countString} λεπτό} other {{countString} λεπτά}}"
 
+#: src/components/uptime-table/uptime-table.tsx
+msgid "{days, plural, one {# day} other {# days}}"
+msgstr ""
+
 #: src/components/network-monitors-table/network-monitors-columns.tsx
 msgid "{daysLeft, plural, one {# day} other {# days}}"
 msgstr ""
@@ -59,6 +63,10 @@ msgstr ""
 #: src/components/routes/system/charts/disk-charts.tsx
 msgid "{diskName} I/O"
 msgstr "I/O {diskName}"
+
+#: src/components/uptime-table/uptime-table.tsx
+msgid "{incidents, plural, one {# incident} other {# incidents}}"
+msgstr ""
 
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "{numFailed, plural, one {# failed service} other {# failed services}}"
@@ -204,6 +212,14 @@ msgstr "Ειδοποιήσεις"
 msgid "All Containers"
 msgstr "Όλα τα κοντέινερ"
 
+#: src/components/uptime-table/uptime-table.tsx
+msgid "All protocols"
+msgstr ""
+
+#: src/components/uptime-table/uptime-table.tsx
+msgid "All statuses"
+msgstr ""
+
 #: src/components/alerts/alerts-sheet.tsx
 #: src/components/command-palette.tsx
 #: src/components/routes/home.tsx
@@ -225,6 +241,10 @@ msgstr "Είστε βέβαιοι;"
 #: src/components/copy-to-clipboard.tsx
 msgid "Automatic copy requires a secure context."
 msgstr "Η αυτόματη αντιγραφή απαιτεί ασφαλές περιβάλλον."
+
+#: src/components/uptime-table/uptime-table.tsx
+msgid "Availability history for the last 24 hours"
+msgstr ""
 
 #: src/components/routes/system/storage-pools-table.tsx
 msgctxt "Disk space available"
@@ -405,6 +425,7 @@ msgstr "Κελσίου (°C)"
 
 #: src/components/network-monitors-table/network-monitors-columns.tsx
 #: src/components/network-monitors-table/network-monitors-columns.tsx
+#: src/components/uptime-table/uptime-table.tsx
 msgid "Certificate"
 msgstr ""
 
@@ -715,6 +736,11 @@ msgstr "Προεπιλογή"
 msgid "Default time period"
 msgstr "Προεπιλεγμένη χρονική περίοδος"
 
+#: src/components/uptime-table/uptime-table.tsx
+#: src/components/uptime-table/uptime-table.tsx
+msgid "Degraded"
+msgstr ""
+
 #: src/components/network-monitors-table/network-monitors-columns.tsx
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/routes/settings/quiet-hours.tsx
@@ -788,6 +814,8 @@ msgstr "Τεκμηρίωση"
 #: src/components/alerts-history-columns.tsx
 #: src/components/routes/system/info-bar.tsx
 #: src/components/systems-table/systems-table-columns.tsx
+#: src/components/uptime-table/uptime-table.tsx
+#: src/components/uptime-table/uptime-table.tsx
 #: src/lib/alerts.ts
 msgid "Down"
 msgstr "Εκτός λειτουργίας"
@@ -795,6 +823,11 @@ msgstr "Εκτός λειτουργίας"
 #: src/components/systems-table/systems-table.tsx
 msgid "Down ({downSystemsLength})"
 msgstr "Εκτός λειτουργίας ({downSystemsLength})"
+
+#. placeholder {0}: statusTotals.down
+#: src/components/uptime-table/uptime-table.tsx
+msgid "Down: {0}"
+msgstr ""
 
 #: src/components/routes/system/network-sheet.tsx
 msgid "Download"
@@ -878,6 +911,7 @@ msgstr "Προσωρινό"
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/settings/tokens-fingerprints.tsx
 #: src/components/systemd-table/systemd-table.tsx
+#: src/components/uptime-table/uptime-table.tsx
 msgid "Error"
 msgstr "Σφάλμα"
 
@@ -905,6 +939,7 @@ msgid "Exited active"
 msgstr "Ενεργό μετά την έξοδο"
 
 #: src/components/network-monitors-table/network-monitors-columns.tsx
+#: src/components/uptime-table/uptime-table.tsx
 msgid "Expired"
 msgstr ""
 
@@ -986,6 +1021,7 @@ msgstr "Ανεμιστήρες"
 #: src/components/routes/system/storage-pools-table.tsx
 #: src/components/systemd-table/systemd-table.tsx
 #: src/components/systems-table/systems-table.tsx
+#: src/components/uptime-table/uptime-table.tsx
 msgid "Filter..."
 msgstr "Φίλτρο..."
 
@@ -1147,6 +1183,14 @@ msgstr "Μη έγκυρη διεύθυνση email."
 msgid "Language"
 msgstr "Γλώσσα"
 
+#: src/components/uptime-table/uptime-table.tsx
+msgid "Last 24 hours"
+msgstr ""
+
+#: src/components/uptime-table/uptime-table.tsx
+msgid "Last check"
+msgstr ""
+
 #: src/components/systems-table/systems-table.tsx
 msgid "Layout"
 msgstr "Διάταξη"
@@ -1189,9 +1233,14 @@ msgstr "Μέσ. φορτίο"
 msgid "Load state"
 msgstr "Κατάσταση φόρτωσης"
 
+#: src/components/uptime-table/uptime-table.tsx
+msgid "Loading history..."
+msgstr ""
+
 #: src/components/processes-table/processes-table.tsx
 #: src/components/processes-table/processes-table.tsx
 #: src/components/systemd-table/systemd-table.tsx
+#: src/components/uptime-table/uptime-table.tsx
 msgid "Loading..."
 msgstr "Φόρτωση..."
 
@@ -1370,6 +1419,14 @@ msgstr "Όχι"
 msgid "No detail data for this pool."
 msgstr "Δεν υπάρχουν λεπτομερή δεδομένα για αυτό το pool."
 
+#: src/components/uptime-table/uptime-table.tsx
+msgid "No history"
+msgstr ""
+
+#: src/components/uptime-table/uptime-table.tsx
+msgid "No incidents"
+msgstr ""
+
 #: src/components/command-palette.tsx
 #: src/components/systemd-table/systemd-table.tsx
 msgid "No results found."
@@ -1383,6 +1440,7 @@ msgstr "Δεν βρέθηκαν αποτελέσματα."
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/routes/system/smart-table.tsx
 #: src/components/systemd-table/systemd-table.tsx
+#: src/components/uptime-table/uptime-table.tsx
 msgid "No results."
 msgstr "Κανένα αποτέλεσμα."
 
@@ -1450,6 +1508,11 @@ msgstr "Κωδικός μίας χρήσης"
 msgid "Open menu"
 msgstr "Άνοιγμα μενού"
 
+#. placeholder {0}: statusTotals.up + statusTotals.degraded
+#: src/components/uptime-table/uptime-table.tsx
+msgid "Operational: {0}"
+msgstr ""
+
 #: src/components/login/auth-form.tsx
 msgid "Or continue with"
 msgstr "Ή συνεχίστε με"
@@ -1466,6 +1529,7 @@ msgstr "Αντικατάσταση υπαρχουσών ειδοποιήσεων
 msgid "Packet loss (%)"
 msgstr "Απώλεια πακέτων (%)"
 
+#: src/components/command-palette.tsx
 #: src/components/command-palette.tsx
 #: src/components/command-palette.tsx
 #: src/components/command-palette.tsx
@@ -1512,12 +1576,19 @@ msgid "Pause"
 msgstr "Παύση"
 
 #: src/components/systems-table/systems-table-columns.tsx
+#: src/components/uptime-table/uptime-table.tsx
+#: src/components/uptime-table/uptime-table.tsx
 msgid "Paused"
 msgstr "Σε παύση"
 
 #: src/components/systems-table/systems-table.tsx
 msgid "Paused ({pausedSystemsLength})"
 msgstr "Σε παύση ({pausedSystemsLength})"
+
+#. placeholder {0}: statusTotals.paused
+#: src/components/uptime-table/uptime-table.tsx
+msgid "Paused: {0}"
+msgstr ""
 
 #: src/components/routes/settings/heartbeat.tsx
 msgid "Payload format"
@@ -1628,6 +1699,8 @@ msgstr ""
 #: src/components/network-monitors-table/monitor-dialog.tsx
 #: src/components/network-monitors-table/network-monitors-columns.tsx
 #: src/components/network-monitors-table/network-monitors-columns.tsx
+#: src/components/uptime-table/uptime-table.tsx
+#: src/components/uptime-table/uptime-table.tsx
 msgid "Protocol"
 msgstr "Πρωτόκολλο"
 
@@ -1719,6 +1792,7 @@ msgstr "Επιλύθηκε"
 #: src/components/network-monitors-table/network-monitors-columns.tsx
 #: src/components/network-monitors-table/network-monitors-columns.tsx
 #: src/components/routes/system/charts/monitors-charts.tsx
+#: src/components/uptime-table/uptime-table.tsx
 msgid "Response"
 msgstr "Απόκριση"
 
@@ -1947,6 +2021,8 @@ msgstr "Κατάσταση"
 #: src/components/routes/system/smart-table.tsx
 #: src/components/systemd-table/systemd-table.tsx
 #: src/components/systems-table/systems-table.tsx
+#: src/components/uptime-table/uptime-table.tsx
+#: src/components/uptime-table/uptime-table.tsx
 #: src/lib/alerts.ts
 msgid "Status"
 msgstr "Κατάσταση"
@@ -2025,6 +2101,7 @@ msgstr "Καρτέλες"
 #: src/components/network-monitors-table/monitor-dialog.tsx
 #: src/components/network-monitors-table/network-monitors-columns.tsx
 #: src/components/network-monitors-table/network-monitors-columns.tsx
+#: src/components/uptime-table/uptime-table.tsx
 msgid "Target"
 msgstr "Στόχος"
 
@@ -2140,6 +2217,7 @@ msgstr "Συνολικός χρόνος ανάγνωσης/εγγραφής (μ�
 
 #. placeholder {0}: data.length
 #: src/components/systemd-table/systemd-table.tsx
+#: src/components/uptime-table/uptime-table.tsx
 msgid "Total: {0}"
 msgstr "Σύνολο: {0}"
 
@@ -2251,6 +2329,8 @@ msgstr "Καθολικό διακριτικό"
 #. Context: Battery state
 #: src/components/processes-table/processes-table-columns.tsx
 #: src/components/routes/system/storage-pools-table.tsx
+#: src/components/uptime-table/uptime-table.tsx
+#: src/components/uptime-table/uptime-table.tsx
 #: src/lib/i18n.ts
 msgid "Unknown"
 msgstr "Άγνωστο"
@@ -2263,6 +2343,8 @@ msgstr "Απεριόριστο"
 #. Context: System is up
 #: src/components/routes/system/info-bar.tsx
 #: src/components/systems-table/systems-table-columns.tsx
+#: src/components/uptime-table/uptime-table.tsx
+#: src/components/uptime-table/uptime-table.tsx
 msgid "Up"
 msgstr "Σε λειτουργία"
 
@@ -2295,8 +2377,14 @@ msgstr ""
 msgid "Upload"
 msgstr "Αποστολή"
 
+#: src/components/command-palette.tsx
+#: src/components/navbar.tsx
+#: src/components/navbar.tsx
 #: src/components/routes/system/info-bar.tsx
+#: src/components/routes/uptime.tsx
 #: src/components/systems-table/systems-table-columns.tsx
+#: src/components/uptime-table/uptime-table.tsx
+#: src/components/uptime-table/uptime-table.tsx
 msgid "Uptime"
 msgstr "Χρόνος λειτουργίας"
 

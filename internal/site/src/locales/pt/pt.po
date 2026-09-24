@@ -52,6 +52,10 @@ msgstr "{count, plural, one {{countString} hora} other {{countString} horas}}"
 msgid "{count, plural, one {{countString} minute} few {{countString} minutes} many {{countString} minutes} other {{countString} minutes}}"
 msgstr "{count, plural, one {{countString} minuto} other {{countString} minutos}}"
 
+#: src/components/uptime-table/uptime-table.tsx
+msgid "{days, plural, one {# day} other {# days}}"
+msgstr ""
+
 #: src/components/network-monitors-table/network-monitors-columns.tsx
 msgid "{daysLeft, plural, one {# day} other {# days}}"
 msgstr ""
@@ -59,6 +63,10 @@ msgstr ""
 #: src/components/routes/system/charts/disk-charts.tsx
 msgid "{diskName} I/O"
 msgstr "E/S de {diskName}"
+
+#: src/components/uptime-table/uptime-table.tsx
+msgid "{incidents, plural, one {# incident} other {# incidents}}"
+msgstr ""
 
 #: src/components/systems-table/systems-table-columns.tsx
 msgid "{numFailed, plural, one {# failed service} other {# failed services}}"
@@ -204,6 +212,14 @@ msgstr "Alertas"
 msgid "All Containers"
 msgstr "Todos os Contêineres"
 
+#: src/components/uptime-table/uptime-table.tsx
+msgid "All protocols"
+msgstr ""
+
+#: src/components/uptime-table/uptime-table.tsx
+msgid "All statuses"
+msgstr ""
+
 #: src/components/alerts/alerts-sheet.tsx
 #: src/components/command-palette.tsx
 #: src/components/routes/home.tsx
@@ -225,6 +241,10 @@ msgstr "Tem certeza?"
 #: src/components/copy-to-clipboard.tsx
 msgid "Automatic copy requires a secure context."
 msgstr "A cópia automática requer um contexto seguro."
+
+#: src/components/uptime-table/uptime-table.tsx
+msgid "Availability history for the last 24 hours"
+msgstr ""
 
 #: src/components/routes/system/storage-pools-table.tsx
 msgctxt "Disk space available"
@@ -405,6 +425,7 @@ msgstr "Celsius (°C)"
 
 #: src/components/network-monitors-table/network-monitors-columns.tsx
 #: src/components/network-monitors-table/network-monitors-columns.tsx
+#: src/components/uptime-table/uptime-table.tsx
 msgid "Certificate"
 msgstr ""
 
@@ -715,6 +736,11 @@ msgstr "Predefinido"
 msgid "Default time period"
 msgstr "Período de tempo padrão"
 
+#: src/components/uptime-table/uptime-table.tsx
+#: src/components/uptime-table/uptime-table.tsx
+msgid "Degraded"
+msgstr ""
+
 #: src/components/network-monitors-table/network-monitors-columns.tsx
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/routes/settings/quiet-hours.tsx
@@ -788,6 +814,8 @@ msgstr "Documentação"
 #: src/components/alerts-history-columns.tsx
 #: src/components/routes/system/info-bar.tsx
 #: src/components/systems-table/systems-table-columns.tsx
+#: src/components/uptime-table/uptime-table.tsx
+#: src/components/uptime-table/uptime-table.tsx
 #: src/lib/alerts.ts
 msgid "Down"
 msgstr "Desligado"
@@ -795,6 +823,11 @@ msgstr "Desligado"
 #: src/components/systems-table/systems-table.tsx
 msgid "Down ({downSystemsLength})"
 msgstr "Inativo ({downSystemsLength})"
+
+#. placeholder {0}: statusTotals.down
+#: src/components/uptime-table/uptime-table.tsx
+msgid "Down: {0}"
+msgstr ""
 
 #: src/components/routes/system/network-sheet.tsx
 msgid "Download"
@@ -878,6 +911,7 @@ msgstr "Efêmero"
 #: src/components/routes/settings/quiet-hours.tsx
 #: src/components/routes/settings/tokens-fingerprints.tsx
 #: src/components/systemd-table/systemd-table.tsx
+#: src/components/uptime-table/uptime-table.tsx
 msgid "Error"
 msgstr "Erro"
 
@@ -905,6 +939,7 @@ msgid "Exited active"
 msgstr "Saiu ativo"
 
 #: src/components/network-monitors-table/network-monitors-columns.tsx
+#: src/components/uptime-table/uptime-table.tsx
 msgid "Expired"
 msgstr ""
 
@@ -986,6 +1021,7 @@ msgstr "Ventoinhas"
 #: src/components/routes/system/storage-pools-table.tsx
 #: src/components/systemd-table/systemd-table.tsx
 #: src/components/systems-table/systems-table.tsx
+#: src/components/uptime-table/uptime-table.tsx
 msgid "Filter..."
 msgstr "Filtrar..."
 
@@ -1147,6 +1183,14 @@ msgstr "Endereço de email inválido."
 msgid "Language"
 msgstr "Idioma"
 
+#: src/components/uptime-table/uptime-table.tsx
+msgid "Last 24 hours"
+msgstr ""
+
+#: src/components/uptime-table/uptime-table.tsx
+msgid "Last check"
+msgstr ""
+
 #: src/components/systems-table/systems-table.tsx
 msgid "Layout"
 msgstr "Aspeto"
@@ -1189,9 +1233,14 @@ msgstr "Carga Média"
 msgid "Load state"
 msgstr "Estado de carga"
 
+#: src/components/uptime-table/uptime-table.tsx
+msgid "Loading history..."
+msgstr ""
+
 #: src/components/processes-table/processes-table.tsx
 #: src/components/processes-table/processes-table.tsx
 #: src/components/systemd-table/systemd-table.tsx
+#: src/components/uptime-table/uptime-table.tsx
 msgid "Loading..."
 msgstr "Carregando..."
 
@@ -1370,6 +1419,14 @@ msgstr "Não"
 msgid "No detail data for this pool."
 msgstr "Não existem dados detalhados para este pool."
 
+#: src/components/uptime-table/uptime-table.tsx
+msgid "No history"
+msgstr ""
+
+#: src/components/uptime-table/uptime-table.tsx
+msgid "No incidents"
+msgstr ""
+
 #: src/components/command-palette.tsx
 #: src/components/systemd-table/systemd-table.tsx
 msgid "No results found."
@@ -1383,6 +1440,7 @@ msgstr "Nenhum resultado encontrado."
 #: src/components/routes/settings/alerts-history-data-table.tsx
 #: src/components/routes/system/smart-table.tsx
 #: src/components/systemd-table/systemd-table.tsx
+#: src/components/uptime-table/uptime-table.tsx
 msgid "No results."
 msgstr "Sem resultados."
 
@@ -1450,6 +1508,11 @@ msgstr "Senha de uso único"
 msgid "Open menu"
 msgstr "Abrir menu"
 
+#. placeholder {0}: statusTotals.up + statusTotals.degraded
+#: src/components/uptime-table/uptime-table.tsx
+msgid "Operational: {0}"
+msgstr ""
+
 #: src/components/login/auth-form.tsx
 msgid "Or continue with"
 msgstr "Ou continue com"
@@ -1466,6 +1529,7 @@ msgstr "Sobrescrever alertas existentes"
 msgid "Packet loss (%)"
 msgstr "Perda de pacotes (%)"
 
+#: src/components/command-palette.tsx
 #: src/components/command-palette.tsx
 #: src/components/command-palette.tsx
 #: src/components/command-palette.tsx
@@ -1512,12 +1576,19 @@ msgid "Pause"
 msgstr "Pausar"
 
 #: src/components/systems-table/systems-table-columns.tsx
+#: src/components/uptime-table/uptime-table.tsx
+#: src/components/uptime-table/uptime-table.tsx
 msgid "Paused"
 msgstr "Pausado"
 
 #: src/components/systems-table/systems-table.tsx
 msgid "Paused ({pausedSystemsLength})"
 msgstr "Pausado ({pausedSystemsLength})"
+
+#. placeholder {0}: statusTotals.paused
+#: src/components/uptime-table/uptime-table.tsx
+msgid "Paused: {0}"
+msgstr ""
 
 #: src/components/routes/settings/heartbeat.tsx
 msgid "Payload format"
@@ -1628,6 +1699,8 @@ msgstr "Processos"
 #: src/components/network-monitors-table/monitor-dialog.tsx
 #: src/components/network-monitors-table/network-monitors-columns.tsx
 #: src/components/network-monitors-table/network-monitors-columns.tsx
+#: src/components/uptime-table/uptime-table.tsx
+#: src/components/uptime-table/uptime-table.tsx
 msgid "Protocol"
 msgstr "Protocolo"
 
@@ -1719,6 +1792,7 @@ msgstr "Resolvido"
 #: src/components/network-monitors-table/network-monitors-columns.tsx
 #: src/components/network-monitors-table/network-monitors-columns.tsx
 #: src/components/routes/system/charts/monitors-charts.tsx
+#: src/components/uptime-table/uptime-table.tsx
 msgid "Response"
 msgstr "Resposta"
 
@@ -1947,6 +2021,8 @@ msgstr "Estado"
 #: src/components/routes/system/smart-table.tsx
 #: src/components/systemd-table/systemd-table.tsx
 #: src/components/systems-table/systems-table.tsx
+#: src/components/uptime-table/uptime-table.tsx
+#: src/components/uptime-table/uptime-table.tsx
 #: src/lib/alerts.ts
 msgid "Status"
 msgstr "Estado"
@@ -2025,6 +2101,7 @@ msgstr "Separadores"
 #: src/components/network-monitors-table/monitor-dialog.tsx
 #: src/components/network-monitors-table/network-monitors-columns.tsx
 #: src/components/network-monitors-table/network-monitors-columns.tsx
+#: src/components/uptime-table/uptime-table.tsx
 msgid "Target"
 msgstr "Destino"
 
@@ -2140,6 +2217,7 @@ msgstr "Tempo total gasto em leitura/escrita (pode exceder 100%)"
 
 #. placeholder {0}: data.length
 #: src/components/systemd-table/systemd-table.tsx
+#: src/components/uptime-table/uptime-table.tsx
 msgid "Total: {0}"
 msgstr "Total: {0}"
 
@@ -2251,6 +2329,8 @@ msgstr "Token universal"
 #. Context: Battery state
 #: src/components/processes-table/processes-table-columns.tsx
 #: src/components/routes/system/storage-pools-table.tsx
+#: src/components/uptime-table/uptime-table.tsx
+#: src/components/uptime-table/uptime-table.tsx
 #: src/lib/i18n.ts
 msgid "Unknown"
 msgstr "Desconhecida"
@@ -2263,6 +2343,8 @@ msgstr "Ilimitado"
 #. Context: System is up
 #: src/components/routes/system/info-bar.tsx
 #: src/components/systems-table/systems-table-columns.tsx
+#: src/components/uptime-table/uptime-table.tsx
+#: src/components/uptime-table/uptime-table.tsx
 msgid "Up"
 msgstr "Ligado"
 
@@ -2295,8 +2377,14 @@ msgstr "Atualizado a cada 10 segundos."
 msgid "Upload"
 msgstr "Carregar"
 
+#: src/components/command-palette.tsx
+#: src/components/navbar.tsx
+#: src/components/navbar.tsx
 #: src/components/routes/system/info-bar.tsx
+#: src/components/routes/uptime.tsx
 #: src/components/systems-table/systems-table-columns.tsx
+#: src/components/uptime-table/uptime-table.tsx
+#: src/components/uptime-table/uptime-table.tsx
 msgid "Uptime"
 msgstr "Tempo de Atividade"
 

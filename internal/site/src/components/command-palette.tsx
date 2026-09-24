@@ -3,6 +3,7 @@ import { Trans } from "@lingui/react/macro"
 import { getPagePath } from "@nanostores/router"
 import { DialogDescription } from "@radix-ui/react-dialog"
 import {
+	ActivityIcon,
 	AlertOctagonIcon,
 	BookIcon,
 	ContainerIcon,
@@ -136,6 +137,20 @@ export default memo(function CommandPalette({ open, setOpen }: { open: boolean; 
 							<ListTreeIcon className="me-2 size-4" />
 							<span>
 								<Trans>Processes</Trans>
+							</span>
+							<CommandShortcut>
+								<Trans>Page</Trans>
+							</CommandShortcut>
+						</CommandItem>
+						<CommandItem
+							onSelect={() => {
+								navigate(getPagePath($router, "uptime"))
+								setOpen(false)
+							}}
+						>
+							<ActivityIcon className="me-2 size-4" />
+							<span>
+								<Trans>Uptime</Trans>
 							</span>
 							<CommandShortcut>
 								<Trans>Page</Trans>

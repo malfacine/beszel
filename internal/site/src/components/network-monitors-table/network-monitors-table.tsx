@@ -1,6 +1,6 @@
 import { getCertDaysLeft, getCertExpiryLevel, getMonitorTarget } from "@/lib/network-monitor-utils"
 import { t } from "@lingui/core/macro"
-import { Plural, Trans } from "@lingui/react/macro"
+import { Trans } from "@lingui/react/macro"
 import {
 	type ColumnFiltersState,
 	flexRender,
@@ -618,7 +618,7 @@ const NetworkMonitorTableRow = memo(function NetworkMonitorTableRow({
 	)
 })
 
-function NetworkMonitorSheet({
+export function NetworkMonitorSheet({
 	open,
 	onOpenChange,
 	monitor,

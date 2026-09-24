@@ -1,6 +1,7 @@
 import { Trans } from "@lingui/react/macro"
 import { getPagePath } from "@nanostores/router"
 import {
+	ActivityIcon,
 	ContainerIcon,
 	DatabaseBackupIcon,
 	HardDriveIcon,
@@ -118,6 +119,10 @@ export default function Navbar() {
 								<ListTreeIcon className="h-4 w-4 me-2.5" strokeWidth={1.5} />
 								<Trans>Processes</Trans>
 							</DropdownMenuItem>
+							<DropdownMenuItem onClick={() => navigate(getPagePath($router, "uptime"))} className="flex items-center">
+								<ActivityIcon className="h-4 w-4 me-2.5" strokeWidth={1.5} />
+								<Trans>Uptime</Trans>
+							</DropdownMenuItem>
 							<DropdownMenuItem onClick={() => navigate(getPagePath($router, "smart"))} className="flex items-center">
 								<HardDriveIcon className="h-4 w-4 me-2.5" strokeWidth={1.5} />
 								<span>S.M.A.R.T.</span>
@@ -216,6 +221,21 @@ export default function Navbar() {
 					</TooltipTrigger>
 					<TooltipContent>
 						<Trans>Processes</Trans>
+					</TooltipContent>
+				</Tooltip>
+				<Tooltip>
+					<TooltipTrigger asChild>
+						<Link
+							href={getPagePath($router, "uptime")}
+							className={cn(buttonVariants({ variant: "ghost", size: "icon" }))}
+							aria-label="Uptime"
+							onMouseEnter={() => import("@/components/routes/uptime")}
+						>
+							<ActivityIcon className="h-[1.2rem] w-[1.2rem]" strokeWidth={1.5} />
+						</Link>
+					</TooltipTrigger>
+					<TooltipContent>
+						<Trans>Uptime</Trans>
 					</TooltipContent>
 				</Tooltip>
 				<Tooltip>
