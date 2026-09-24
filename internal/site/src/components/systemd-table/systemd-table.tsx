@@ -52,29 +52,39 @@ export default function SystemdTable({ systemId }: { systemId?: string }) {
 		function fetchData(systemId?: string) {
 			pb.collection<SystemdRecord>("systemd_services")
 				.getList(0, 2000, {
-					fields: "name,state,sub,cpu,cpuPeak,memory,memPeak,updated",
+					fields: "system,name,state,sub,cpu,cpuPeak,memory,memPeak,updated",
 					filter: systemId ? pb.filter("system={:system}", { system: systemId }) : undefined,
 				})
-				.then(
-					({ items }) =>
-						items.length &&
-						setData((curItems) => {
-							const lastUpdated = Math.max(items[0].updated, items.at(-1)?.updated ?? 0)
-							const systemdNames = new Set()
-							const newItems: SystemdRecord[] = []
-							for (const item of items) {
-								if (Math.abs(lastUpdated - item.updated) < 70_000) {
-									systemdNames.add(item.name)
-									newItems.push(item)
-								}
+				.then(({ items }) =>
+					setData((curItems) => {
+						if (!items.length) {
+							return systemId ? curItems.filter((item) => item.system !== systemId) : []
+						}
+
+						const latestBySystem = new Map<string, number>()
+						for (const item of items) {
+							latestBySystem.set(item.system, Math.max(latestBySystem.get(item.system) ?? 0, item.updated))
+						}
+						const serviceKeys = new Set<string>()
+						const newItems: SystemdRecord[] = []
+						for (const item of items) {
+							const latestUpdated = latestBySystem.get(item.system) ?? 0
+							if (Math.abs(latestUpdated - item.updated) < 70_000) {
+								serviceKeys.add(`${item.system}:${item.name}`)
+								newItems.push(item)
 							}
-							for (const item of curItems) {
-								if (!systemdNames.has(item.name) && lastUpdated - item.updated < 70_000) {
-									newItems.push(item)
-								}
+						}
+						for (const item of curItems) {
+							const latestUpdated = latestBySystem.get(item.system)
+							if (
+								!serviceKeys.has(`${item.system}:${item.name}`) &&
+								(latestUpdated === undefined || latestUpdated - item.updated < 70_000)
+							) {
+								newItems.push(item)
 							}
-							return newItems
-						})
+						}
+						return newItems
+					})
 				)
 		}
 
@@ -103,8 +113,7 @@ export default function SystemdTable({ systemId }: { systemId?: string }) {
 
 	const table = useReactTable({
 		data,
-		// columns: systemdTableCols.filter((col) => (systemId ? col.id !== "system" : true)),
-		columns: systemdTableCols,
+		columns: systemdTableCols.filter((col) => (systemId ? col.id !== "system" : true)),
 		getCoreRowModel: getCoreRowModel(),
 		getSortedRowModel: getSortedRowModel(),
 		getFilteredRowModel: getFilteredRowModel(),
@@ -149,7 +158,7 @@ export default function SystemdTable({ systemId }: { systemId?: string }) {
 		return totals
 	}, [data])
 
-	if (!data.length && !globalFilter) {
+	if (systemId && !data.length && !globalFilter) {
 		return null
 	}
 
@@ -283,7 +292,7 @@ function SystemdSheet({
 
 		pb.send<{ details: SystemdServiceDetails }>("/api/beszel/systemd/info", {
 			query: {
-				system: systemId,
+				system: systemId ?? service.system,
 				service: service.name,
 			},
 		})
@@ -460,6 +469,7 @@ function SystemdSheet({
 							<table className="w-full text-sm">
 								<tbody>
 									{renderRow("name", t`Name`, service.name, true)}
+									{!systemId && renderRow("system", t`System`, $allSystemsById.get()[service.system]?.name, true)}
 									{renderRow("description", t`Description`, details?.Description, true)}
 									{renderRow("loadState", t`Load state`, details?.LoadState, true)}
 									{renderRow(

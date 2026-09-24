@@ -15,6 +15,7 @@ import {
 	Server,
 	ServerIcon,
 	SettingsIcon,
+	TerminalSquareIcon,
 	UsersIcon,
 } from "lucide-react"
 import { memo, useEffect, useMemo } from "react"
@@ -106,6 +107,20 @@ export default memo(function CommandPalette({ open, setOpen }: { open: boolean; 
 							<ContainerIcon className="me-2 size-4" />
 							<span>
 								<Trans>All Containers</Trans>
+							</span>
+							<CommandShortcut>
+								<Trans>Page</Trans>
+							</CommandShortcut>
+						</CommandItem>
+						<CommandItem
+							onSelect={() => {
+								navigate(getPagePath($router, "services"))
+								setOpen(false)
+							}}
+						>
+							<TerminalSquareIcon className="me-2 size-4" />
+							<span>
+								<Trans>Services</Trans>
 							</span>
 							<CommandShortcut>
 								<Trans>Page</Trans>

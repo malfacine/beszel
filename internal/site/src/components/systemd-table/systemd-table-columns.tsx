@@ -9,12 +9,13 @@ import {
 	ClockIcon,
 	CpuIcon,
 	MemoryStickIcon,
+	ServerIcon,
 	TerminalSquareIcon,
 } from "lucide-react"
 import { Badge } from "../ui/badge"
 import { t } from "@lingui/core/macro"
-// import { $allSystemsById } from "@/lib/stores"
-// import { useStore } from "@nanostores/react"
+import { $allSystemsById, $longestSystemName } from "@/lib/stores"
+import { useStore } from "@nanostores/react"
 
 function getSubStateColor(subState: ServiceSubState) {
 	switch (subState) {
@@ -29,7 +30,6 @@ function getSubStateColor(subState: ServiceSubState) {
 	}
 }
 
-
 export const systemdTableCols: ColumnDef<SystemdRecord>[] = [
 	{
 		id: "name",
@@ -40,21 +40,30 @@ export const systemdTableCols: ColumnDef<SystemdRecord>[] = [
 			return <span className="ms-1.5 xl:w-50 block truncate">{getValue() as string}</span>
 		},
 	},
-	// {
-	// 	id: "system",
-	// 	accessorFn: (record) => record.system,
-	// 	sortingFn: (a, b) => {
-	// 		const allSystems = $allSystemsById.get()
-	// 		const systemNameA = allSystems[a.original.system]?.name ?? ""
-	// 		const systemNameB = allSystems[b.original.system]?.name ?? ""
-	// 		return systemNameA.localeCompare(systemNameB)
-	// 	},
-	// 	header: ({ column }) => <HeaderButton column={column} name={t`System`} Icon={ServerIcon} />,
-	// 	cell: ({ getValue }) => {
-	// 		const allSystems = useStore($allSystemsById)
-	// 		return <span className="ms-1.5 xl:w-34 block truncate">{allSystems[getValue() as string]?.name ?? ""}</span>
-	// 	},
-	// },
+	{
+		id: "system",
+		accessorFn: (record) => record.system,
+		sortingFn: (a, b) => {
+			const allSystems = $allSystemsById.get()
+			const systemNameA = allSystems[a.original.system]?.name ?? ""
+			const systemNameB = allSystems[b.original.system]?.name ?? ""
+			const primary = systemNameA.localeCompare(systemNameB)
+			return primary || a.original.name.localeCompare(b.original.name)
+		},
+		header: ({ column }) => <HeaderButton column={column} name={t`System`} Icon={ServerIcon} />,
+		cell: ({ getValue }) => {
+			const allSystems = useStore($allSystemsById)
+			const longestName = useStore($longestSystemName)
+			return (
+				<div className="ms-1 relative w-fit max-w-40">
+					<span className="invisible block whitespace-nowrap" aria-hidden="true">
+						{longestName}
+					</span>
+					<span className="absolute inset-0 truncate">{allSystems[getValue() as string]?.name ?? ""}</span>
+				</div>
+			)
+		},
+	},
 	{
 		id: "state",
 		accessorFn: (record) => record.state,
@@ -160,20 +169,27 @@ export const systemdTableCols: ColumnDef<SystemdRecord>[] = [
 		header: ({ column }) => <HeaderButton column={column} name={t`Updated`} Icon={ClockIcon} />,
 		cell: ({ getValue }) => {
 			const timestamp = getValue() as number
-			return (
-				<span className="ms-1.5 tabular-nums">
-					{hourWithSeconds(new Date(timestamp).toISOString())}
-				</span>
-			)
+			return <span className="ms-1.5 tabular-nums">{hourWithSeconds(new Date(timestamp).toISOString())}</span>
 		},
 	},
 ]
 
-function HeaderButton({ column, name, Icon }: { column: Column<SystemdRecord>; name: string; Icon: React.ElementType }) {
+function HeaderButton({
+	column,
+	name,
+	Icon,
+}: {
+	column: Column<SystemdRecord>
+	name: string
+	Icon: React.ElementType
+}) {
 	const isSorted = column.getIsSorted()
 	return (
 		<Button
-			className={cn("h-9 px-3 flex items-center gap-2 duration-50", isSorted && "bg-accent/70 light:bg-accent text-accent-foreground/90")}
+			className={cn(
+				"h-9 px-3 flex items-center gap-2 duration-50",
+				isSorted && "bg-accent/70 light:bg-accent text-accent-foreground/90"
+			)}
 			variant="ghost"
 			onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
 		>

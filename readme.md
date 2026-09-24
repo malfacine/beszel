@@ -17,6 +17,7 @@ It has a friendly web interface, simple configuration, and is ready to use out o
 - **Simple**: Easy setup with little manual configuration required.
 - **Alerts**: Configurable alerts for most metrics. Supports many notification services.
 - **Docker stats**: Tracks CPU, memory, and network usage history for each container.
+- **Systemd services**: Read-only global view of services reported by connected Linux systems.
 - **Network monitoring**: Monitor response time and interruptions directly from agents.
 - **S.M.A.R.T.**: Disk health data and notifications on drive failure.
 - **Multi-user**: Users manage their own systems. Admins can share systems across users.
@@ -54,8 +55,13 @@ The [quick start guide](https://beszel.dev/guide/getting-started) and other docu
 - **GPU usage / power draw** - Nvidia, AMD, and Intel.
 - **Battery charge** - Host system and some peripherals.
 - **Containers** - Status and metrics of all running Docker / Podman containers.
+- **Systemd services** - Current state, CPU, memory, and details for services reported by Linux agents.
 - **S.M.A.R.T.** - Host system disk health (includes eMMC wear/EOL and Linux mdraid array health via sysfs when available).
 - **ZFS** - Pool capacity, usage, health, I/O throughput, scrub status, and per-dataset usage.
+
+### Systemd service monitoring
+
+The global **Services** page combines services from all connected Linux systems in one read-only table. See the [systemd monitoring guide](supplemental/guides/systemd-monitoring.md) for agent requirements and Docker configuration.
 
 ## Help and discussion
 

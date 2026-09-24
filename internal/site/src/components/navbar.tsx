@@ -12,6 +12,7 @@ import {
 	SearchIcon,
 	ServerIcon,
 	SettingsIcon,
+	TerminalSquareIcon,
 	UserIcon,
 	UsersIcon,
 } from "lucide-react"
@@ -102,6 +103,13 @@ export default function Navbar() {
 								<ContainerIcon className="h-4 w-4 me-2.5" strokeWidth={1.5} />
 								<Trans>All Containers</Trans>
 							</DropdownMenuItem>
+							<DropdownMenuItem
+								onClick={() => navigate(getPagePath($router, "services"))}
+								className="flex items-center"
+							>
+								<TerminalSquareIcon className="h-4 w-4 me-2.5" strokeWidth={1.5} />
+								<Trans>Services</Trans>
+							</DropdownMenuItem>
 							<DropdownMenuItem onClick={() => navigate(getPagePath($router, "smart"))} className="flex items-center">
 								<HardDriveIcon className="h-4 w-4 me-2.5" strokeWidth={1.5} />
 								<span>S.M.A.R.T.</span>
@@ -170,6 +178,21 @@ export default function Navbar() {
 					</TooltipTrigger>
 					<TooltipContent>
 						<Trans>All Containers</Trans>
+					</TooltipContent>
+				</Tooltip>
+				<Tooltip>
+					<TooltipTrigger asChild>
+						<Link
+							href={getPagePath($router, "services")}
+							className={cn(buttonVariants({ variant: "ghost", size: "icon" }))}
+							aria-label="Services"
+							onMouseEnter={() => import("@/components/routes/services")}
+						>
+							<TerminalSquareIcon className="h-[1.2rem] w-[1.2rem]" strokeWidth={1.5} />
+						</Link>
+					</TooltipTrigger>
+					<TooltipContent>
+						<Trans>Services</Trans>
 					</TooltipContent>
 				</Tooltip>
 				<Tooltip>
