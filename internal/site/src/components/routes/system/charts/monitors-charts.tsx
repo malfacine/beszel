@@ -1,4 +1,4 @@
-import { getMonitorTarget } from "@/lib/network-monitor-utils"
+import { getMonitorLabel, getMonitorTarget } from "@/lib/network-monitor-utils"
 import LineChartDefault from "@/components/charts/line-chart"
 import type { DataPoint } from "@/components/charts/line-chart"
 import { decimalString, formatMicroseconds, matchesFilterGroups, parseFilterGroups, toFixedFloat } from "@/lib/utils"
@@ -58,8 +58,8 @@ function MonitorChart({
 		const dot = chartData.chartTime === "1m"
 		for (let i = 0; i < count; i++) {
 			const p = sortedMonitors[i]
-			const label = getMonitorTarget(p)
-			const labelLower = label.toLowerCase()
+			const label = getMonitorLabel(p)
+			const labelLower = `${label} ${getMonitorTarget(p)}`.toLowerCase()
 			const filtered = filterGroups.length > 0 && !matchesFilterGroups(labelLower, filterGroups)
 			if (filtered) {
 				continue

@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test"
-import { getMonitorStats } from "../src/lib/network-monitor-utils"
+import { getMonitorLabel, getMonitorStats } from "../src/lib/network-monitor-utils"
 
 describe("monitor stats derived from stored counts", () => {
 	test("retains probe weights and response precision", () => {
@@ -32,5 +32,14 @@ describe("monitor stats derived from stored counts", () => {
 			...counts,
 		})
 		expect(stats).toEqual({ res_avg: 0, res_min: 0, res_max: 0, loss })
+	})
+})
+
+describe("monitor labels", () => {
+	test("uses the configured name and falls back to the formatted target", () => {
+		expect(getMonitorLabel({ name: "Public API", target: "api.example.com", protocol: "http", port: 0 })).toBe(
+			"Public API"
+		)
+		expect(getMonitorLabel({ name: "", target: "2001:db8::1", protocol: "tcp", port: 443 })).toBe("[2001:db8::1]:443")
 	})
 })

@@ -1368,6 +1368,9 @@ msgstr "Model"
 #: src/components/network-monitors-table/monitor-dialog.tsx
 #: src/components/network-monitors-table/monitor-dialog.tsx
 #: src/components/network-monitors-table/monitor-dialog.tsx
+#: src/components/network-monitors-table/network-monitors-columns.tsx
+#: src/components/network-monitors-table/network-monitors-columns.tsx
+#: src/components/uptime-table/uptime-table.tsx
 msgid "Monitor"
 msgstr "Monitor"
 
@@ -1382,6 +1385,7 @@ msgstr "Mountpoint"
 #: src/components/add-system.tsx
 #: src/components/alerts-history-columns.tsx
 #: src/components/containers-table/containers-table-columns.tsx
+#: src/components/network-monitors-table/monitor-dialog.tsx
 #: src/components/processes-table/processes-table-columns.tsx
 #: src/components/systemd-table/systemd-table-columns.tsx
 #: src/components/systemd-table/systemd-table.tsx
@@ -1535,6 +1539,10 @@ msgstr "Open menu"
 #: src/components/uptime-table/uptime-table.tsx
 msgid "Operational: {0}"
 msgstr "Operational: {0}"
+
+#: src/components/network-monitors-table/monitor-dialog.tsx
+msgid "Optional name"
+msgstr "Optional name"
 
 #: src/components/login/auth-form.tsx
 msgid "Or continue with"
@@ -2126,9 +2134,6 @@ msgid "Tabs"
 msgstr "Tabs"
 
 #: src/components/network-monitors-table/monitor-dialog.tsx
-#: src/components/network-monitors-table/network-monitors-columns.tsx
-#: src/components/network-monitors-table/network-monitors-columns.tsx
-#: src/components/uptime-table/uptime-table.tsx
 msgid "Target"
 msgstr "Target"
 

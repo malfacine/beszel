@@ -16,6 +16,10 @@ export function getMonitorTarget(monitor: Pick<NetworkMonitorRecord, "target" | 
 	return `${host}:${monitor.port}`
 }
 
+export function getMonitorLabel(monitor: Pick<NetworkMonitorRecord, "name" | "target" | "protocol" | "port">) {
+	return monitor.name?.trim() || getMonitorTarget(monitor)
+}
+
 /** Whole days until the certificate expires; negative once expired. */
 export function getCertDaysLeft(cert: Pick<MonitorCertInfo, "expires">, now = Date.now()) {
 	return Math.floor((cert.expires - now) / 86_400_000)

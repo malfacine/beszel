@@ -191,11 +191,12 @@ func TestCopyMonitorToNewRecordDropsResultFields(t *testing.T) {
 
 	collection, err := hub.FindCachedCollectionByNameOrId("network_monitors")
 	require.NoError(t, err)
-	assert.Nil(t, collection.Fields.GetByName("name"))
+	collection.Fields.Add(&core.TextField{Name: "name", Max: 100})
 
 	oldRecord := core.NewRecord(collection)
 	oldRecord.Load(map[string]any{
 		"system":   "sys123",
+		"name":     "Public API",
 		"target":   "https://example.com",
 		"protocol": "http",
 		"port":     443,
@@ -213,6 +214,7 @@ func TestCopyMonitorToNewRecordDropsResultFields(t *testing.T) {
 	newRecord := copyMonitorToNewRecord(oldRecord, "next12345")
 
 	assert.Equal(t, "next12345", newRecord.Id)
+	assert.Equal(t, "Public API", newRecord.GetString("name"))
 	assert.Equal(t, "https://example.com", newRecord.GetString("target"))
 	assert.Equal(t, "http", newRecord.GetString("protocol"))
 	assert.Equal(t, 443, newRecord.GetInt("port"))

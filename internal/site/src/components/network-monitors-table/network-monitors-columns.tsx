@@ -38,7 +38,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { useMemo } from "react"
 import { formatBulkMonitorLine } from "@/components/network-monitors-table/monitor-dialog"
 import { Badge } from "../ui/badge"
-import { getCertDaysLeft, getCertExpiryLevel, getMonitorTarget } from "@/lib/network-monitor-utils"
+import { getCertDaysLeft, getCertExpiryLevel, getMonitorLabel, getMonitorTarget } from "@/lib/network-monitor-utils"
 import { pb } from "@/lib/api"
 
 const certExpiryDotColors = { ok: "bg-green-500", warning: "bg-yellow-500", critical: "bg-red-500" }
@@ -144,11 +144,11 @@ export function getMonitorColumns(
 		},
 		{
 			id: "target",
-			meta: { label: t`Target` },
-			sortingFn: (a, b) => a.original.target.localeCompare(b.original.target),
-			accessorFn: (record) => getMonitorTarget(record),
-			header: ({ column }) => <HeaderButton column={column} name={t`Target`} Icon={GlobeIcon} />,
-			cell: ({ row, getValue }) => {
+			meta: { label: t`Monitor` },
+			sortingFn: (a, b) => getMonitorLabel(a.original).localeCompare(getMonitorLabel(b.original)),
+			accessorFn: (record) => `${getMonitorLabel(record)} ${getMonitorTarget(record)}`,
+			header: ({ column }) => <HeaderButton column={column} name={t`Monitor`} Icon={GlobeIcon} />,
+			cell: ({ row }) => {
 				const monitor = row.original
 				const { status } = useStore($allSystemsById)[monitor.system] || {}
 
@@ -167,7 +167,12 @@ export function getMonitorColumns(
 							<span className="invisible block overflow-hidden whitespace-nowrap" aria-hidden="true">
 								{longestTarget}
 							</span>
-							<span className="absolute inset-0 truncate">{getValue() as string}</span>
+							<div className="absolute inset-0">
+								<div className="truncate font-medium">{getMonitorLabel(monitor)}</div>
+								{monitor.name?.trim() && (
+									<div className="truncate text-xs text-muted-foreground">{getMonitorTarget(monitor)}</div>
+								)}
+							</div>
 						</div>
 					</div>
 				)

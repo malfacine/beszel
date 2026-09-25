@@ -1,4 +1,4 @@
-import { getCertDaysLeft, getCertExpiryLevel, getMonitorTarget } from "@/lib/network-monitor-utils"
+import { getCertDaysLeft, getCertExpiryLevel, getMonitorLabel, getMonitorTarget } from "@/lib/network-monitor-utils"
 import { t } from "@lingui/core/macro"
 import { Trans } from "@lingui/react/macro"
 import {
@@ -150,8 +150,11 @@ export default function NetworkMonitorsTableNew({
 	const longestTarget = useMemo(() => {
 		let longestTarget = ""
 		for (const p of monitors) {
-			if (isVisuallyLonger(getMonitorTarget(p), longestTarget)) {
-				longestTarget = getMonitorTarget(p)
+			const displayValues = p.name?.trim() ? [getMonitorLabel(p), getMonitorTarget(p)] : [getMonitorTarget(p)]
+			for (const value of displayValues) {
+				if (isVisuallyLonger(value, longestTarget)) {
+					longestTarget = value
+				}
 			}
 		}
 		return longestTarget
@@ -295,7 +298,8 @@ export default function NetworkMonitorsTableNew({
 			if (!value) return true
 			const monitor = row.original
 			const systemName = $allSystemsById.get()[monitor.system]?.name ?? ""
-			const searchString = `${getMonitorTarget(monitor)}${monitor.protocol}${systemName}`.toLocaleLowerCase()
+			const searchString =
+				`${monitor.name ?? ""}${getMonitorTarget(monitor)}${monitor.protocol}${systemName}`.toLocaleLowerCase()
 			return matchesFilterGroups(searchString, parseFilterGroups(value))
 		},
 	})
@@ -645,13 +649,7 @@ function CertExpiry({ cert }: { cert: MonitorCertInfo }) {
 			<Separator orientation="vertical" className="h-2.5 bg-muted-foreground opacity-70" />
 			<ShieldCheckIcon className={cn("size-3.5 text-muted-foreground -me-1", certExpiryTextColors[level])} />
 			<span className={certExpiryTextColors[level]}>
-				{daysLeft < 0 ? (
-					<Trans>Certificate expired {expires}</Trans>
-				) : (
-					<Trans>
-						Certificate expires {expires} 
-					</Trans>
-				)}
+				{daysLeft < 0 ? <Trans>Certificate expired {expires}</Trans> : <Trans>Certificate expires {expires}</Trans>}
 			</span>
 			{cert.issuer && (
 				<>
@@ -698,7 +696,7 @@ function NetworkMonitorSheetContent({
 		[system?.info?.v, direction, chartTime]
 	)
 	const hasMonitorStats = monitorStats.some((record) => record.stats?.[monitor.id] != null)
-	const monitorLabel = getMonitorTarget(monitor)
+	const monitorLabel = getMonitorLabel(monitor)
 
 	return (
 		<Sheet open={open} onOpenChange={onOpenChange}>
@@ -706,6 +704,12 @@ function NetworkMonitorSheetContent({
 				<SheetHeader className="mb-0 border-b p-0 pb-4">
 					<SheetTitle>{monitorLabel}</SheetTitle>
 					<SheetDescription className="flex flex-wrap items-center gap-x-2 gap-y-1">
+						{monitor.name?.trim() && (
+							<>
+								<span>{getMonitorTarget(monitor)}</span>
+								<Separator orientation="vertical" className="h-2.5 bg-muted-foreground opacity-70" />
+							</>
+						)}
 						<ServerIcon className="size-3.5 text-muted-foreground" />
 						<Link className="hover:underline" href={getPagePath($router, "system", { id: system?.id ?? "" })}>
 							{system?.name ?? ""}

@@ -34,6 +34,7 @@ type MonitorProtocol = "icmp" | "tcp" | "http" | "dns"
 
 type MonitorValues = {
 	system: string
+	name: string
 	target: string
 	protocol: MonitorProtocol
 	port: number
@@ -56,6 +57,7 @@ const MonitorIntervalSchema = v.pipe(v.string(), v.toNumber(), v.minValue(1), v.
 // defaults and HTTP target normalization stay in one place.
 const NormalizedMonitorValuesSchema = v.pipe(
 	v.object({
+		name: v.pipe(v.string(), v.trim(), v.maxLength(100, "Name must be 100 characters or fewer")),
 		target: v.pipe(v.string(), v.trim(), v.nonEmpty("target is required")),
 		protocol: MonitorProtocolSchema,
 		port: v.number(),
@@ -75,6 +77,7 @@ const NormalizedMonitorValuesSchema = v.pipe(
 		return {
 			// HTTP monitors may be entered as bare hostnames, so normalize them to a
 			// scheme-bearing URL before the payload is sent to PocketBase.
+			name: input.name,
 			target: protocol === "http" ? httpTarget : input.target,
 			protocol,
 			port,
@@ -173,6 +176,7 @@ function parseBulkMonitorLine(line: string, lineNumber: number, system: string) 
 
 	return buildMonitorPayload({
 		system,
+		name: "",
 		target: parsed.output.target,
 		protocol,
 		port: parsed.output.port ? Number(parsed.output.port) : 0,
@@ -589,6 +593,7 @@ function MonitorDialogContent({
 	onOpenBulkAdd?: (selectedSystemIds: Set<string>) => void
 }) {
 	const [protocol, setProtocol] = useState<MonitorProtocol>(monitor?.protocol ?? "icmp")
+	const [name, setName] = useState(monitor?.name ?? "")
 	const [target, setTarget] = useState(monitor?.target ?? "")
 	const [port, setPort] = useState(monitor?.protocol === "tcp" && monitor.port ? String(monitor.port) : "")
 	const [monitorInterval, setMonitorInterval] = useState(String(monitor?.interval ?? defaultInterval))
@@ -607,6 +612,7 @@ function MonitorDialogContent({
 		}
 
 		setProtocol(monitor?.protocol ?? "icmp")
+		setName(monitor?.name ?? "")
 		setTarget(monitor?.target ?? "")
 		setPort(monitor?.protocol === "tcp" && monitor.port ? String(monitor.port) : "")
 		setMonitorInterval(String(monitor?.interval ?? defaultInterval))
@@ -626,6 +632,7 @@ function MonitorDialogContent({
 			const payload = buildMonitorPayload(
 				{
 					system: targetSystems[0],
+					name,
 					target,
 					protocol,
 					port: protocol === "tcp" ? Number(port) : 0,
@@ -703,10 +710,23 @@ function MonitorDialogContent({
 					</div>
 				)}
 				<div className="grid gap-2">
-					<Label>
+					<Label htmlFor="monitor-name">
+						<Trans>Name</Trans>
+					</Label>
+					<Input
+						id="monitor-name"
+						value={name}
+						onChange={(e) => setName(e.target.value)}
+						placeholder={t`Optional name`}
+						maxLength={100}
+					/>
+				</div>
+				<div className="grid gap-2">
+					<Label htmlFor="monitor-target">
 						<Trans>Target</Trans>
 					</Label>
 					<Input
+						id="monitor-target"
 						value={target}
 						onChange={(e) => setTarget(e.target.value)}
 						placeholder={protocol === "http" ? "http://localhost:8090" : "1.1.1.1"}
@@ -775,11 +795,7 @@ function MonitorDialogContent({
 						type="submit"
 						disabled={loading || (!systemId && (isEditing ? !selectedSystemId : !selectedSystemIds.size))}
 					>
-						{isEditing ? (
-							<Trans>Save {{ foo: t`Monitor` }}</Trans>
-						) : (
-							<Trans>Add {{ foo: t`Monitor` }}</Trans>
-						)}
+						{isEditing ? <Trans>Save {{ foo: t`Monitor` }}</Trans> : <Trans>Add {{ foo: t`Monitor` }}</Trans>}
 					</Button>
 				</DialogFooter>
 			</form>

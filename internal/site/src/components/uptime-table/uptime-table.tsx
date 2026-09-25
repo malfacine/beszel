@@ -34,7 +34,7 @@ import { Separator } from "@/components/ui/separator"
 import { TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { toast } from "@/components/ui/use-toast"
 import { getPbTimestamp, pb } from "@/lib/api"
-import { getCertDaysLeft, getCertExpiryLevel, getMonitorTarget } from "@/lib/network-monitor-utils"
+import { getCertDaysLeft, getCertExpiryLevel, getMonitorLabel, getMonitorTarget } from "@/lib/network-monitor-utils"
 import { $allSystemsById } from "@/lib/stores"
 import {
 	buildAvailabilitySegments,
@@ -86,6 +86,7 @@ type UptimeStatus = "up" | "degraded" | "down" | "paused" | "unknown"
 
 interface UptimeRow {
 	monitor: NetworkMonitorRecord
+	name: string
 	target: string
 	systemName: string
 	status: UptimeStatus
@@ -209,6 +210,7 @@ export default function UptimeTable({ monitors, isLoading }: { monitors: Network
 			const monitorHistory = historyByMonitor.get(monitor.id) ?? []
 			return {
 				monitor,
+				name: getMonitorLabel(monitor),
 				target: getMonitorTarget(monitor),
 				systemName: system?.name ?? "",
 				status,
@@ -253,15 +255,19 @@ export default function UptimeTable({ monitors, isLoading }: { monitors: Network
 			},
 			{
 				id: "target",
-				header: ({ column }) => <HeaderButton column={column} name={t`Target`} Icon={GlobeIcon} />,
-				accessorFn: (row) => `${row.target} ${row.systemName}`,
+				header: ({ column }) => <HeaderButton column={column} name={t`Monitor`} Icon={GlobeIcon} />,
+				accessorFn: (row) => `${row.name} ${row.target} ${row.systemName}`,
 				cell: ({ row }) => (
 					<div className="ms-1.5 min-w-48 max-w-80">
-						<div className="truncate font-medium">{row.original.target}</div>
-						<div className="truncate text-xs text-muted-foreground">{row.original.systemName}</div>
+						<div className="truncate font-medium">{row.original.name}</div>
+						<div className="truncate text-xs text-muted-foreground">
+							{row.original.monitor.name?.trim()
+								? `${row.original.target} · ${row.original.systemName}`
+								: row.original.systemName}
+						</div>
 					</div>
 				),
-				sortingFn: (a, b) => a.original.target.localeCompare(b.original.target),
+				sortingFn: (a, b) => a.original.name.localeCompare(b.original.name),
 				size: 300,
 			},
 			{
@@ -345,7 +351,8 @@ export default function UptimeTable({ monitors, isLoading }: { monitors: Network
 		state: { sorting, globalFilter },
 		globalFilterFn: (row, _columnId, filterValue) => {
 			const item = row.original
-			const search = `${item.target} ${item.systemName} ${item.monitor.protocol} ${item.statusLabel}`.toLowerCase()
+			const search =
+				`${item.name} ${item.target} ${item.systemName} ${item.monitor.protocol} ${item.statusLabel}`.toLowerCase()
 			return (filterValue as string)
 				.toLowerCase()
 				.split(" ")
@@ -547,7 +554,7 @@ const UptimeTableRow = memo(function UptimeTableRow({
 		<TableRow
 			className="cursor-pointer"
 			tabIndex={0}
-			aria-label={`${row.original.target}, ${row.original.statusLabel}`}
+			aria-label={`${row.original.name}, ${row.original.statusLabel}`}
 			onClick={open}
 			onKeyDown={(event) => {
 				if (event.key === "Enter" || event.key === " ") {
