@@ -182,6 +182,21 @@ export default function Navbar() {
 				<Tooltip>
 					<TooltipTrigger asChild>
 						<Link
+							href={getPagePath($router, "home")}
+							className={cn(buttonVariants({ variant: "ghost", size: "icon" }))}
+							aria-label="Systems"
+							onMouseEnter={() => import("@/components/routes/home")}
+						>
+							<ServerIcon className="h-[1.2rem] w-[1.2rem]" strokeWidth={1.5} />
+						</Link>
+					</TooltipTrigger>
+					<TooltipContent>
+						<Trans>All Systems</Trans>
+					</TooltipContent>
+				</Tooltip>
+				<Tooltip>
+					<TooltipTrigger asChild>
+						<Link
 							href={getPagePath($router, "containers")}
 							className={cn(buttonVariants({ variant: "ghost", size: "icon" }))}
 							aria-label="Containers"
