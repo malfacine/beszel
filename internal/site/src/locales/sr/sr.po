@@ -80,6 +80,11 @@ msgstr "{threads, plural, one {# nit} few {# niti} other {# niti}}"
 msgid "{totalCount, plural, one {# service} other {# services}}"
 msgstr ""
 
+#: src/components/uptime-table/uptime-table.tsx
+#: src/components/uptime-table/uptime-table.tsx
+msgid "1 day"
+msgstr ""
+
 #: src/lib/utils.ts
 msgid "1 hour"
 msgstr "1 сат"
@@ -110,6 +115,8 @@ msgstr "15 мин"
 msgid "24 hours"
 msgstr "24 сата"
 
+#: src/components/uptime-table/uptime-table.tsx
+#: src/components/uptime-table/uptime-table.tsx
 #: src/lib/utils.ts
 msgid "30 days"
 msgstr "30 дана"
@@ -118,6 +125,11 @@ msgstr "30 дана"
 #: src/components/routes/system/charts/load-average-chart.tsx
 msgid "5 min"
 msgstr "5 мин"
+
+#: src/components/uptime-table/uptime-table.tsx
+#: src/components/uptime-table/uptime-table.tsx
+msgid "7 days"
+msgstr ""
 
 #. Table column
 #: src/components/routes/settings/quiet-hours.tsx
@@ -243,8 +255,12 @@ msgid "Automatic copy requires a secure context."
 msgstr "Аутоматско копирање захтева безбедан контекст."
 
 #: src/components/uptime-table/uptime-table.tsx
-msgid "Availability history for the last 24 hours"
+msgid "Availability history"
 msgstr ""
+
+#: src/components/uptime-table/uptime-table.tsx
+#~ msgid "Availability history for the last 24 hours"
+#~ msgstr ""
 
 #: src/components/routes/system/storage-pools-table.tsx
 msgctxt "Disk space available"
@@ -1184,7 +1200,19 @@ msgid "Language"
 msgstr "Језик"
 
 #: src/components/uptime-table/uptime-table.tsx
-msgid "Last 24 hours"
+msgid "Last 1 day"
+msgstr ""
+
+#: src/components/uptime-table/uptime-table.tsx
+#~ msgid "Last 24 hours"
+#~ msgstr ""
+
+#: src/components/uptime-table/uptime-table.tsx
+msgid "Last 30 days"
+msgstr ""
+
+#: src/components/uptime-table/uptime-table.tsx
+msgid "Last 7 days"
 msgstr ""
 
 #: src/components/uptime-table/uptime-table.tsx
@@ -1606,6 +1634,10 @@ msgstr "Проценат времена у којем је диск заузет
 #: src/components/routes/system/cpu-sheet.tsx
 msgid "Percentage of time spent in each state"
 msgstr "Проценат времена проведеног у сваком стању"
+
+#: src/components/uptime-table/uptime-table.tsx
+msgid "Period"
+msgstr ""
 
 #: src/components/routes/settings/tokens-fingerprints.tsx
 msgid "Permanent"

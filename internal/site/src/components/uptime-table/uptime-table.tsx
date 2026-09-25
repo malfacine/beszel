@@ -48,10 +48,31 @@ import {
 import { cn, decimalString, formatMicroseconds, formatShortDate, hourWithSeconds, useBrowserStorage } from "@/lib/utils"
 import type { ChartTimes, NetworkMonitorRecord, RawMonitorStatsRecord } from "@/types"
 
-const periodConfig: Record<UptimePeriod, { chartTime: ChartTimes; type: string }> = {
-	"24h": { chartTime: "24h", type: "20m" },
-	"7d": { chartTime: "1w", type: "120m" },
-	"30d": { chartTime: "30d", type: "480m" },
+const periodConfig: Record<
+	UptimePeriod,
+	{ chartTime: ChartTimes; type: string; segmentCount: number; segmentDuration: number; expectedInterval: number }
+> = {
+	"24h": {
+		chartTime: "24h",
+		type: "20m",
+		segmentCount: 24,
+		segmentDuration: 60 * 60 * 1000,
+		expectedInterval: 20 * 60 * 1000,
+	},
+	"7d": {
+		chartTime: "1w",
+		type: "120m",
+		segmentCount: 28,
+		segmentDuration: 6 * 60 * 60 * 1000,
+		expectedInterval: 2 * 60 * 60 * 1000,
+	},
+	"30d": {
+		chartTime: "30d",
+		type: "480m",
+		segmentCount: 30,
+		segmentDuration: 24 * 60 * 60 * 1000,
+		expectedInterval: 8 * 60 * 60 * 1000,
+	},
 }
 
 const protocolColors: Record<string, string> = {
@@ -69,21 +90,19 @@ interface UptimeRow {
 	systemName: string
 	status: UptimeStatus
 	statusLabel: string
-	uptime24h: UptimeSummary | undefined
-	uptime7d: UptimeSummary | undefined
-	uptime30d: UptimeSummary | undefined
+	uptime: UptimeSummary | undefined
 	history: AvailabilitySegment[]
 	incidents: number
 	certDays: number | null
 }
 
 interface UptimeHistoryState {
-	records: Record<UptimePeriod, RawMonitorStatsRecord[]>
+	records: RawMonitorStatsRecord[]
 	fetchedAt: number
 }
 
 const emptyHistory: UptimeHistoryState = {
-	records: { "24h": [], "7d": [], "30d": [] },
+	records: [],
 	fetchedAt: Date.now(),
 }
 
@@ -101,35 +120,30 @@ function formatUptime(value: number | null | undefined) {
 	return `${decimalString(value, value >= 99 ? 3 : 2)}%`
 }
 
-function useUptimeHistory(enabled: boolean) {
+function useUptimeHistory(period: UptimePeriod, enabled: boolean) {
 	const [history, setHistory] = useState<UptimeHistoryState>(emptyHistory)
 	const [isLoading, setIsLoading] = useState(false)
 
 	useEffect(() => {
 		if (!enabled) return
 		let disposed = false
+		const config = periodConfig[period]
+		setHistory({ records: [], fetchedAt: Date.now() })
 
 		async function fetchHistory() {
 			if (!disposed) setIsLoading(true)
 			try {
-				const entries = await Promise.all(
-					(Object.entries(periodConfig) as [UptimePeriod, (typeof periodConfig)[UptimePeriod]][]).map(
-						async ([period, config]) => {
-							const records = await pb.collection<RawMonitorStatsRecord>("network_monitor_stats").getFullList({
-								filter: pb.filter("created>{:created} && type={:type}", {
-									created: getPbTimestamp(config.chartTime, undefined, true),
-									type: config.type,
-								}),
-								fields: "monitor,res_min,res_max,total_count,success_count,res_sum,created",
-								sort: "created",
-								requestKey: `uptime:${period}`,
-							})
-							return [period, records] as const
-						}
-					)
-				)
+				const records = await pb.collection<RawMonitorStatsRecord>("network_monitor_stats").getFullList({
+					filter: pb.filter("created>{:created} && type={:type}", {
+						created: getPbTimestamp(config.chartTime, undefined, true),
+						type: config.type,
+					}),
+					fields: "monitor,res_min,res_max,total_count,success_count,res_sum,created",
+					sort: "created",
+					requestKey: `uptime:${period}`,
+				})
 				if (!disposed) {
-					setHistory({ records: Object.fromEntries(entries) as UptimeHistoryState["records"], fetchedAt: Date.now() })
+					setHistory({ records, fetchedAt: Date.now() })
 				}
 			} catch (error) {
 				if (!disposed) {
@@ -145,11 +159,9 @@ function useUptimeHistory(enabled: boolean) {
 		return () => {
 			disposed = true
 			window.clearInterval(interval)
-			for (const period of Object.keys(periodConfig)) {
-				pb.cancelRequest(`uptime:${period}`)
-			}
+			pb.cancelRequest(`uptime:${period}`)
 		}
-	}, [enabled])
+	}, [enabled, period])
 
 	return { history, isLoading }
 }
@@ -157,9 +169,10 @@ function useUptimeHistory(enabled: boolean) {
 export default function UptimeTable({ monitors, isLoading }: { monitors: NetworkMonitorRecord[]; isLoading: boolean }) {
 	const { t } = useLingui()
 	const systems = useStore($allSystemsById)
-	const { history, isLoading: historyLoading } = useUptimeHistory(monitors.length > 0)
+	const [period, setPeriod] = useBrowserStorage<UptimePeriod>("uptime-period", "24h", sessionStorage)
+	const { history, isLoading: historyLoading } = useUptimeHistory(period, monitors.length > 0)
 	const [sorting, setSorting] = useBrowserStorage<SortingState>(
-		"sort-uptime",
+		"sort-uptime-2",
 		[{ id: "status", desc: false }],
 		sessionStorage
 	)
@@ -168,15 +181,19 @@ export default function UptimeTable({ monitors, isLoading }: { monitors: Network
 	const [protocolFilter, setProtocolFilter] = useState("all")
 	const [activeMonitor, setActiveMonitor] = useState<NetworkMonitorRecord>()
 
-	const summaries = useMemo(
-		() => ({
-			"24h": summarizeUptime(history.records["24h"]),
-			"7d": summarizeUptime(history.records["7d"]),
-			"30d": summarizeUptime(history.records["30d"]),
-		}),
-		[history.records]
-	)
-	const historyByMonitor = useMemo(() => groupMonitorStats(history.records["24h"]), [history.records])
+	const periodLabels: Record<UptimePeriod, string> = {
+		"24h": t`1 day`,
+		"7d": t`7 days`,
+		"30d": t`30 days`,
+	}
+	const historyLabels: Record<UptimePeriod, string> = {
+		"24h": t`Last 1 day`,
+		"7d": t`Last 7 days`,
+		"30d": t`Last 30 days`,
+	}
+	const selectedPeriod = periodConfig[period]
+	const summaries = useMemo(() => summarizeUptime(history.records), [history.records])
+	const historyByMonitor = useMemo(() => groupMonitorStats(history.records), [history.records])
 
 	const data = useMemo<UptimeRow[]>(() => {
 		return monitors.map((monitor) => {
@@ -196,15 +213,18 @@ export default function UptimeTable({ monitors, isLoading }: { monitors: Network
 				systemName: system?.name ?? "",
 				status,
 				statusLabel: statusLabels[status],
-				uptime24h: summaries["24h"].get(monitor.id),
-				uptime7d: summaries["7d"].get(monitor.id),
-				uptime30d: summaries["30d"].get(monitor.id),
-				history: buildAvailabilitySegments(monitorHistory, history.fetchedAt),
-				incidents: countIncidents(monitorHistory),
+				uptime: summaries.get(monitor.id),
+				history: buildAvailabilitySegments(
+					monitorHistory,
+					history.fetchedAt,
+					selectedPeriod.segmentCount,
+					selectedPeriod.segmentDuration
+				),
+				incidents: countIncidents(monitorHistory, selectedPeriod.expectedInterval),
 				certDays: monitor.certInfo?.expires ? getCertDaysLeft(monitor.certInfo, history.fetchedAt) : null,
 			}
 		})
-	}, [history.fetchedAt, historyByMonitor, monitors, summaries, systems, t])
+	}, [history.fetchedAt, historyByMonitor, monitors, selectedPeriod, summaries, systems, t])
 
 	const filteredData = useMemo(
 		() =>
@@ -267,37 +287,31 @@ export default function UptimeTable({ monitors, isLoading }: { monitors: Network
 				invertSorting: true,
 				size: 115,
 			},
-			...(["24h", "7d", "30d"] as const).map(
-				(period): ColumnDef<UptimeRow> => ({
-					id: `uptime${period}`,
-					header: ({ column }) => <HeaderButton column={column} name={`${t`Uptime`} ${period}`} Icon={ActivityIcon} />,
-					accessorFn: (row) => {
-						if (period === "24h") return row.uptime24h?.uptime
-						if (period === "7d") return row.uptime7d?.uptime
-						return row.uptime30d?.uptime
-					},
-					cell: ({ row }) => {
-						const summary =
-							period === "24h"
-								? row.original.uptime24h
-								: period === "7d"
-									? row.original.uptime7d
-									: row.original.uptime30d
-						return <UptimeCell summary={summary} muted={row.original.status === "paused"} />
-					},
-					invertSorting: true,
-					size: 125,
-				})
-			),
+			{
+				id: "uptime",
+				header: ({ column }) => (
+					<HeaderButton column={column} name={`${t`Uptime`} ${periodLabels[period]}`} Icon={ActivityIcon} />
+				),
+				accessorFn: (row) => row.uptime?.uptime,
+				cell: ({ row }) => <UptimeCell summary={row.original.uptime} muted={row.original.status === "paused"} />,
+				invertSorting: true,
+				size: 135,
+			},
 			{
 				id: "history",
 				header: () => (
 					<div className="h-9 px-3 flex items-center gap-2 font-medium">
 						<ActivityIcon className="size-4" />
-						<Trans>Last 24 hours</Trans>
+						{historyLabels[period]}
 					</div>
 				),
-				cell: ({ row }) => <AvailabilityHistory history={row.original.history} incidents={row.original.incidents} />,
+				cell: ({ row }) => (
+					<AvailabilityHistory
+						history={row.original.history}
+						incidents={row.original.incidents}
+						label={historyLabels[period]}
+					/>
+				),
 				enableSorting: false,
 				size: 230,
 			},
@@ -317,7 +331,7 @@ export default function UptimeTable({ monitors, isLoading }: { monitors: Network
 				size: 120,
 			},
 		],
-		[t]
+		[historyLabels, period, periodLabels, t]
 	)
 
 	const table = useReactTable({
@@ -381,7 +395,23 @@ export default function UptimeTable({ monitors, isLoading }: { monitors: Network
 							onChange={(event) => setGlobalFilter(event.target.value)}
 							className="px-4 w-full sm:w-60"
 						/>
-						<div className="grid grid-cols-2 gap-2">
+						<div className="grid grid-cols-2 gap-2 sm:flex">
+							<Select value={period} onValueChange={(value) => setPeriod(value as UptimePeriod)}>
+								<SelectTrigger className="col-span-2 w-full sm:w-32" aria-label={t`Period`}>
+									<SelectValue />
+								</SelectTrigger>
+								<SelectContent>
+									<SelectItem value="24h">
+										<Trans>1 day</Trans>
+									</SelectItem>
+									<SelectItem value="7d">
+										<Trans>7 days</Trans>
+									</SelectItem>
+									<SelectItem value="30d">
+										<Trans>30 days</Trans>
+									</SelectItem>
+								</SelectContent>
+							</Select>
 							<Select value={statusFilter} onValueChange={setStatusFilter}>
 								<SelectTrigger className="w-full sm:w-36" aria-label={t`Status`}>
 									<SelectValue />
@@ -566,10 +596,18 @@ function UptimeCell({ summary, muted }: { summary?: UptimeSummary; muted: boolea
 	)
 }
 
-function AvailabilityHistory({ history, incidents }: { history: AvailabilitySegment[]; incidents: number }) {
+function AvailabilityHistory({
+	history,
+	incidents,
+	label,
+}: {
+	history: AvailabilitySegment[]
+	incidents: number
+	label: string
+}) {
 	const observed = history.filter((segment) => segment.total > 0).length
 	return (
-		<div className="ms-1.5 min-w-48" role="img" aria-label={t`Availability history for the last 24 hours`}>
+		<div className="ms-1.5 min-w-48" role="img" aria-label={`${t`Availability history`}: ${label}`}>
 			<div className="flex h-5 items-stretch gap-0.5" aria-hidden="true">
 				{history.map((segment, index) => {
 					let color = "bg-muted-foreground/20"

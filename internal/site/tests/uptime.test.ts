@@ -49,6 +49,20 @@ describe("uptime history", () => {
 		expect(segments.map(({ uptime }) => uptime)).toEqual([null, 100, 50, null])
 	})
 
+	test("uses the selected period granularity for longer histories", () => {
+		const sixHours = 6 * 60 * 60 * 1000
+		const end = 28 * sixHours
+		const segments = buildAvailabilitySegments(
+			[record("a", 7 * sixHours + 1, 2, 2), record("a", 27 * sixHours + 1, 2, 1)],
+			end,
+			28,
+			sixHours
+		)
+		expect(segments).toHaveLength(28)
+		expect(segments[7].uptime).toBe(100)
+		expect(segments[27].uptime).toBe(50)
+	})
+
 	test("counts contiguous failures as one incident and splits gaps", () => {
 		const interval = 20 * 60 * 1000
 		const records = [

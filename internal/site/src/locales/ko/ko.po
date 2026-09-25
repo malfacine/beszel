@@ -80,6 +80,11 @@ msgstr "{threads, plural, one {# 스레드} other {# 스레드}}"
 msgid "{totalCount, plural, one {# service} other {# services}}"
 msgstr ""
 
+#: src/components/uptime-table/uptime-table.tsx
+#: src/components/uptime-table/uptime-table.tsx
+msgid "1 day"
+msgstr ""
+
 #: src/lib/utils.ts
 msgid "1 hour"
 msgstr "1시간"
@@ -110,6 +115,8 @@ msgstr "15분"
 msgid "24 hours"
 msgstr "24시간"
 
+#: src/components/uptime-table/uptime-table.tsx
+#: src/components/uptime-table/uptime-table.tsx
 #: src/lib/utils.ts
 msgid "30 days"
 msgstr "30일"
@@ -118,6 +125,11 @@ msgstr "30일"
 #: src/components/routes/system/charts/load-average-chart.tsx
 msgid "5 min"
 msgstr "5분"
+
+#: src/components/uptime-table/uptime-table.tsx
+#: src/components/uptime-table/uptime-table.tsx
+msgid "7 days"
+msgstr ""
 
 #. Table column
 #: src/components/routes/settings/quiet-hours.tsx
@@ -243,8 +255,12 @@ msgid "Automatic copy requires a secure context."
 msgstr "자동 복사는 안전한 컨텍스트가 필요합니다."
 
 #: src/components/uptime-table/uptime-table.tsx
-msgid "Availability history for the last 24 hours"
+msgid "Availability history"
 msgstr ""
+
+#: src/components/uptime-table/uptime-table.tsx
+#~ msgid "Availability history for the last 24 hours"
+#~ msgstr ""
 
 #: src/components/routes/system/storage-pools-table.tsx
 msgctxt "Disk space available"
@@ -1184,7 +1200,19 @@ msgid "Language"
 msgstr "언어"
 
 #: src/components/uptime-table/uptime-table.tsx
-msgid "Last 24 hours"
+msgid "Last 1 day"
+msgstr ""
+
+#: src/components/uptime-table/uptime-table.tsx
+#~ msgid "Last 24 hours"
+#~ msgstr ""
+
+#: src/components/uptime-table/uptime-table.tsx
+msgid "Last 30 days"
+msgstr ""
+
+#: src/components/uptime-table/uptime-table.tsx
+msgid "Last 7 days"
 msgstr ""
 
 #: src/components/uptime-table/uptime-table.tsx
@@ -1606,6 +1634,10 @@ msgstr "디스크가 I/O로 바쁜 시간의 비율"
 #: src/components/routes/system/cpu-sheet.tsx
 msgid "Percentage of time spent in each state"
 msgstr "각 상태에서 보낸 시간의 백분율"
+
+#: src/components/uptime-table/uptime-table.tsx
+msgid "Period"
+msgstr ""
 
 #: src/components/routes/settings/tokens-fingerprints.tsx
 msgid "Permanent"

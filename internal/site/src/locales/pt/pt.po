@@ -80,6 +80,11 @@ msgstr "{threads, plural, one {# thread} other {# threads}}"
 msgid "{totalCount, plural, one {# service} other {# services}}"
 msgstr ""
 
+#: src/components/uptime-table/uptime-table.tsx
+#: src/components/uptime-table/uptime-table.tsx
+msgid "1 day"
+msgstr "1 dia"
+
 #: src/lib/utils.ts
 msgid "1 hour"
 msgstr "1 hora"
@@ -110,6 +115,8 @@ msgstr "15 min"
 msgid "24 hours"
 msgstr "24 horas"
 
+#: src/components/uptime-table/uptime-table.tsx
+#: src/components/uptime-table/uptime-table.tsx
 #: src/lib/utils.ts
 msgid "30 days"
 msgstr "30 dias"
@@ -118,6 +125,11 @@ msgstr "30 dias"
 #: src/components/routes/system/charts/load-average-chart.tsx
 msgid "5 min"
 msgstr "5 min"
+
+#: src/components/uptime-table/uptime-table.tsx
+#: src/components/uptime-table/uptime-table.tsx
+msgid "7 days"
+msgstr "7 dias"
 
 #. Table column
 #: src/components/routes/settings/quiet-hours.tsx
@@ -243,8 +255,12 @@ msgid "Automatic copy requires a secure context."
 msgstr "A cópia automática requer um contexto seguro."
 
 #: src/components/uptime-table/uptime-table.tsx
-msgid "Availability history for the last 24 hours"
-msgstr ""
+msgid "Availability history"
+msgstr "Histórico de disponibilidade"
+
+#: src/components/uptime-table/uptime-table.tsx
+#~ msgid "Availability history for the last 24 hours"
+#~ msgstr ""
 
 #: src/components/routes/system/storage-pools-table.tsx
 msgctxt "Disk space available"
@@ -1184,8 +1200,20 @@ msgid "Language"
 msgstr "Idioma"
 
 #: src/components/uptime-table/uptime-table.tsx
-msgid "Last 24 hours"
-msgstr ""
+msgid "Last 1 day"
+msgstr "Último dia"
+
+#: src/components/uptime-table/uptime-table.tsx
+#~ msgid "Last 24 hours"
+#~ msgstr ""
+
+#: src/components/uptime-table/uptime-table.tsx
+msgid "Last 30 days"
+msgstr "Últimos 30 dias"
+
+#: src/components/uptime-table/uptime-table.tsx
+msgid "Last 7 days"
+msgstr "Últimos 7 dias"
 
 #: src/components/uptime-table/uptime-table.tsx
 msgid "Last check"
@@ -1606,6 +1634,10 @@ msgstr "Percentagem de tempo em que o disco está ocupado com E/S"
 #: src/components/routes/system/cpu-sheet.tsx
 msgid "Percentage of time spent in each state"
 msgstr "Percentagem de tempo gasto em cada estado"
+
+#: src/components/uptime-table/uptime-table.tsx
+msgid "Period"
+msgstr "Período"
 
 #: src/components/routes/settings/tokens-fingerprints.tsx
 msgid "Permanent"

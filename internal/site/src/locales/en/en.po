@@ -75,6 +75,11 @@ msgstr "{threads, plural, one {# thread} other {# threads}}"
 msgid "{totalCount, plural, one {# service} other {# services}}"
 msgstr "{totalCount, plural, one {# service} other {# services}}"
 
+#: src/components/uptime-table/uptime-table.tsx
+#: src/components/uptime-table/uptime-table.tsx
+msgid "1 day"
+msgstr "1 day"
+
 #: src/lib/utils.ts
 msgid "1 hour"
 msgstr "1 hour"
@@ -105,6 +110,8 @@ msgstr "15 min"
 msgid "24 hours"
 msgstr "24 hours"
 
+#: src/components/uptime-table/uptime-table.tsx
+#: src/components/uptime-table/uptime-table.tsx
 #: src/lib/utils.ts
 msgid "30 days"
 msgstr "30 days"
@@ -113,6 +120,11 @@ msgstr "30 days"
 #: src/components/routes/system/charts/load-average-chart.tsx
 msgid "5 min"
 msgstr "5 min"
+
+#: src/components/uptime-table/uptime-table.tsx
+#: src/components/uptime-table/uptime-table.tsx
+msgid "7 days"
+msgstr "7 days"
 
 #. Table column
 #: src/components/routes/settings/quiet-hours.tsx
@@ -238,8 +250,12 @@ msgid "Automatic copy requires a secure context."
 msgstr "Automatic copy requires a secure context."
 
 #: src/components/uptime-table/uptime-table.tsx
-msgid "Availability history for the last 24 hours"
-msgstr "Availability history for the last 24 hours"
+msgid "Availability history"
+msgstr "Availability history"
+
+#: src/components/uptime-table/uptime-table.tsx
+#~ msgid "Availability history for the last 24 hours"
+#~ msgstr "Availability history for the last 24 hours"
 
 #: src/components/routes/system/storage-pools-table.tsx
 msgctxt "Disk space available"
@@ -1179,8 +1195,20 @@ msgid "Language"
 msgstr "Language"
 
 #: src/components/uptime-table/uptime-table.tsx
-msgid "Last 24 hours"
-msgstr "Last 24 hours"
+msgid "Last 1 day"
+msgstr "Last 1 day"
+
+#: src/components/uptime-table/uptime-table.tsx
+#~ msgid "Last 24 hours"
+#~ msgstr "Last 24 hours"
+
+#: src/components/uptime-table/uptime-table.tsx
+msgid "Last 30 days"
+msgstr "Last 30 days"
+
+#: src/components/uptime-table/uptime-table.tsx
+msgid "Last 7 days"
+msgstr "Last 7 days"
 
 #: src/components/uptime-table/uptime-table.tsx
 msgid "Last check"
@@ -1601,6 +1629,10 @@ msgstr "Percent of time the disk is busy with I/O"
 #: src/components/routes/system/cpu-sheet.tsx
 msgid "Percentage of time spent in each state"
 msgstr "Percentage of time spent in each state"
+
+#: src/components/uptime-table/uptime-table.tsx
+msgid "Period"
+msgstr "Period"
 
 #: src/components/routes/settings/tokens-fingerprints.tsx
 msgid "Permanent"
